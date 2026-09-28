@@ -1,0 +1,16 @@
+# 打包产物（可随时用 打包EXE.bat 重新生成）
+dist/
+
+# 本地测试工件与工作台数据
+.qa/
+.workbuddy/
+.build/
+
+# Python
+__pycache__/
+*.pyc
+*.spec
+build/
+
+# 临时文件
+*.log
