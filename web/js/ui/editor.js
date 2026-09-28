@@ -330,7 +330,7 @@
       fold.blocks.forEach(function (b) {
         var collapsedNow = !!fold.collapsed[b.start];
         var arrow = fold.arrowEls[b.start];
-        if (arrow) { arrow.textContent = collapsedNow ? '▸' : '▾'; arrow.title = collapsedNow ? '展开' : '折叠'; }
+        if (arrow) { arrow.textContent = collapsedNow ? '▸' : '▾'; arrow.title = collapsedNow ? '展开' : '折叠'; arrow.classList.toggle('jt-fold-collapsed', collapsedNow); }
         var opener = fold.lineEls[b.start];
         if (opener) opener.classList.toggle('jt-collapsed', collapsedNow);
       });
@@ -452,14 +452,18 @@
         var i = f.getAttribute('data-fold');
         if (i != null && i !== '') toggleFold(parseInt(i, 10));
       });
-      // 悬停行 → 悬浮复制条
-      codeView.addEventListener('mousemove', function (e) {
+      // 悬停行 → 悬浮复制条。
+      // 绑定在面板主体（含复制条自身）：复制条悬浮于正文上方且不属于 codeView，
+      // 若绑定在 codeView，鼠标从行移向按钮时途经正文 padding 区会命中 !el 分支被误隐藏，导致按钮"够不着"。
+      body.addEventListener('mousemove', function (e) {
         if (!fold) return;
+        // 在复制条上（含按钮）：保持现状，不重建也不隐藏
+        if (e.target && e.target.closest && e.target.closest('.jt-copybar')) return;
         var el = e.target && e.target.closest ? e.target.closest('.jt-cline') : null;
         if (!el) { hideCopybar(); return; }
         showCopybar(parseInt(el.getAttribute('data-i'), 10), el);
       });
-      area.addEventListener('mouseleave', hideCopybar);
+      body.addEventListener('mouseleave', hideCopybar);
     }
 
     /* --- 操作按钮 --- */

@@ -1,0 +1,57 @@
+[
+  {
+    "name": "输出折叠视图渲染行数",
+    "pass": true,
+    "detail": "lines=49"
+  },
+  {
+    "name": "找到键值行",
+    "pass": true,
+    "detail": "idx=3"
+  },
+  {
+    "name": "悬停行后复制条出现",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "复制按钮有位置",
+    "pass": true,
+    "detail": "{\"x\":1361,\"y\":295.3046875,\"width\":49,\"height\":19.390625}"
+  },
+  {
+    "name": "鼠标移到按钮上按钮不消失（核心修复）",
+    "pass": true,
+    "detail": "visible=true"
+  },
+  {
+    "name": "按钮处于 :hover 状态",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "点击「复制值」写入剪贴板正确",
+    "pass": true,
+    "detail": "clip=\"张三\" expect=\"张三\""
+  },
+  {
+    "name": "「复制对象」结果为合法 JSON",
+    "pass": true,
+    "detail": "len=851"
+  },
+  {
+    "name": "点击箭头可折叠",
+    "pass": true,
+    "detail": "hidden=48 cls=jt-fold jt-fold-collapsed"
+  },
+  {
+    "name": "折叠态箭头带高亮类",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "console error 数为 0",
+    "pass": true,
+    "detail": ""
+  }
+]

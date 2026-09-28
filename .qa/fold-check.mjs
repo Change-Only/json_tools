@@ -1,4 +1,5 @@
-import { chromium } from 'playwright-core';
+// playwright-core 安装在 $TEMP/jtb-pw（不在本仓库依赖内），用绝对路径动态导入
+const { chromium } = await import('file:///' + (process.env.TEMP || '/tmp').replace(/\\/g, '/') + '/jtb-pw/node_modules/playwright-core/index.mjs');
 const b = await chromium.launch({ channel: 'msedge', headless: true });
 const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
 const errors = [];
@@ -8,7 +9,7 @@ await p.addInitScript(() => {
   window.__clipboard = [];
   navigator.clipboard.writeText = (t) => { window.__clipboard.push(t); return Promise.resolve(); };
 });
-await p.goto('http://127.0.0.1:8878/index.html', { waitUntil: 'load' });
+await p.goto((process.argv[2] || 'http://127.0.0.1:8878') + '/index.html', { waitUntil: 'load' });
 await p.waitForTimeout(1200);
 const R = [];
 const ok = (n, v, d) => R.push((v ? 'PASS ' : 'FAIL ') + n + (v || !d ? '' : ' — ' + d));
