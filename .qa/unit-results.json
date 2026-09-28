@@ -1,0 +1,2036 @@
+{
+  "passed": 290,
+  "failed": 0,
+  "results": [
+    {
+      "group": "T1-资源引用",
+      "name": "index.html 引用本地资源数 = 17（含 favicon.png）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "实际 17：favicon.png, css/tokens.css, css/layout.css, css/components.css, vendor/libs.js, js/core/json.js, js/core/convert.js, js/core/codegen.js, js/core/codec.js, js/core/analyze.js, js/ui/dom.js, js/ui/toast.js, js/ui/storage.js, js/ui/modal.js, js/ui/editor.js, js/tools-registry.js, js/app.js"
+    },
+    {
+      "group": "T1-资源引用",
+      "name": "全部引用资源存在",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "缺失："
+    },
+    {
+      "group": "T1-资源引用",
+      "name": "资源清单",
+      "pass": true,
+      "expected": "",
+      "actual": "favicon.png | css/tokens.css | css/layout.css | css/components.css | vendor/libs.js | js/core/json.js | js/core/convert.js | js/core/codegen.js | js/core/codec.js | js/core/analyze.js | js/ui/dom.js | js/ui/toast.js | js/ui/storage.js | js/ui/modal.js | js/ui/editor.js | js/tools-registry.js | js/app.js  ｜ 非文件引用: "
+    },
+    {
+      "group": "T1-外链/module/emoji",
+      "name": "0 个外链资源（CDN/字体）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "0"
+    },
+    {
+      "group": "T1-外链/module/emoji",
+      "name": "0 处 ES module 残留",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "0"
+    },
+    {
+      "group": "T1-外链/module/emoji",
+      "name": "0 个非许可 emoji（✅❌除外）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "0"
+    },
+    {
+      "group": "T1-注册表",
+      "name": "工具总数 = 68",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "实际 68"
+    },
+    {
+      "group": "T1-注册表",
+      "name": "id 唯一",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "重复："
+    },
+    {
+      "group": "T1-注册表",
+      "name": "每个工具元数据完整（id/cat/name/desc/run/outLang/view/params）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "0"
+    },
+    {
+      "group": "T1-注册表",
+      "name": "分类计数",
+      "pass": true,
+      "expected": "",
+      "actual": "{\"format\":13,\"convert\":20,\"query\":13,\"validate\":9,\"codec\":9,\"utility\":4}"
+    },
+    {
+      "group": "T1-注册表",
+      "name": "分类数 = 6 且每类均有工具",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"format\":13,\"convert\":20,\"query\":13,\"validate\":9,\"codec\":9,\"utility\":4}"
+    },
+    {
+      "group": "T1-参数一一对应",
+      "name": "params 控件与 run 读取一一对应",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "0"
+    },
+    {
+      "group": "T2-json.parse 错误定位",
+      "name": "未闭合字符串 errorLine 有效(>0)",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"line\":3,\"col\":21,\"err\":\"Bad control character in string literal in JSON at position 32 (line 3 column 21)\"}"
+    },
+    {
+      "group": "T2-json.parse 错误定位",
+      "name": "缺逗号 errorLine 指向出错行(>=3)",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"line\":4,\"col\":3}"
+    },
+    {
+      "group": "T2-json.parse 错误定位",
+      "name": "数组尾逗号 errorLine 有效",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"line\":4,\"col\":1}"
+    },
+    {
+      "group": "T2-json.parse 错误定位",
+      "name": "中文全角引号严格解析失败且有行号",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"line\":1,\"err\":\"Expected property name or '}' in JSON at position 1 (line 1 column 2)\"}"
+    },
+    {
+      "group": "T2-json.parse 错误定位",
+      "name": "对象尾逗号 errorLine > 0",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"line\":1}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax 单引号 结果值正确",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"ok\":true,\"value\":{\"a\":1},\"exp\":{\"a\":1}}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax 对象尾逗号 结果值正确",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"ok\":true,\"value\":{\"a\":1},\"exp\":{\"a\":1}}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax 数组尾逗号 结果值正确",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"ok\":true,\"value\":{\"a\":[1,2]},\"exp\":{\"a\":[1,2]}}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax // 注释 结果值正确",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"ok\":true,\"value\":{\"a\":1},\"exp\":{\"a\":1}}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax 块注释 结果值正确",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"ok\":true,\"value\":{\"a\":1},\"exp\":{\"a\":1}}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax 裸键 结果值正确",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"ok\":true,\"value\":{\"a\":1},\"exp\":{\"a\":1}}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax True/False/None 结果值正确",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"ok\":true,\"value\":{\"a\":true,\"b\":false,\"c\":null},\"exp\":{\"a\":true,\"b\":false,\"c\":null}}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax 中文值 结果值正确",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"ok\":true,\"value\":{\"a\":\"中\",\"n\":1},\"exp\":{\"a\":\"中\",\"n\":1}}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax 全角冒号+裸键 结果值正确",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"ok\":true,\"value\":{\"a\":1},\"exp\":{\"a\":1}}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax BOM 处理",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":1}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax 中文引号({“a”:“中文”})",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"ok\":true,\"value\":{\"a\":\"中文\"},\"text\":null}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax 单引号内含转义'",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":\"it's\"}"
+    },
+    {
+      "group": "T2-json.parseLax",
+      "name": "parseLax 混合类型数组",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"x\":1,\"y\":[true,null,2.5]}"
+    },
+    {
+      "group": "T2-格式化与压缩",
+      "name": "缩进2 首行前有换行",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"{\\n  \\\"b\\\": 2,\\n  \\\"a\\\": {\\n    \\\"d\\\": 4,\\n    \\\"c\\\": 3\\n  },\\n  \\\"list\\\": [\\n    1,\\n    2\\n  ]\\n}\""
+    },
+    {
+      "group": "T2-格式化与压缩",
+      "name": "缩进4 使用4空格",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"{\\n    \\\"b\\\": 2,\\n    \\\"a\\\": {\\n        \\\"d\\\": 4,\\n        \\\"c\\\": 3\\n    },\\n    \\\"list\\\": [\\n        1,\\n        2\\n    ]\\n}\""
+    },
+    {
+      "group": "T2-格式化与压缩",
+      "name": "缩进8 使用8空格",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"{\\n        \\\"b\\\": 2,\\n        \\\"a\\\": {\\n                \\\"d\\\": 4,\\n                \\\"c\\\": 3\\n        },\\n        \\\"list\\\": [\\n                1,\\n                2\\n        ]\\n}\""
+    },
+    {
+      "group": "T2-格式化与压缩",
+      "name": "缩进Tab 使用制表符",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"{\\n\\t\\\"b\\\": 2,\\n\\t\\\"a\\\": {\\n\\t\\t\\\"d\\\": 4,\\n\\t\\t\\\"c\\\": 3\\n\\t},\\n\\t\\\"list\\\": [\\n\\t\\t1,\\n\\t\\t2\\n\\t]\\n}\""
+    },
+    {
+      "group": "T2-格式化与压缩",
+      "name": "键排序 asc 顶层 A→Z",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "a,b,list"
+    },
+    {
+      "group": "T2-格式化与压缩",
+      "name": "键排序 asc 递归(内层 c,d)",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "c,d"
+    },
+    {
+      "group": "T2-格式化与压缩",
+      "name": "键排序 desc 顶层 Z→A",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "list,b,a"
+    },
+    {
+      "group": "T2-格式化与压缩",
+      "name": "键排序 desc 递归(内层 d,c)",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "d,c"
+    },
+    {
+      "group": "T2-格式化与压缩",
+      "name": "压缩后可被 JSON.parse 且等价",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"b\":2,\"a\":{\"d\":4,\"c\":3},\"list\":[1,2]}"
+    },
+    {
+      "group": "T2-格式化与压缩",
+      "name": "压缩无多余空白",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"b\":2,\"a\":{\"d\":4,\"c\":3},\"list\":[1,2]}"
+    },
+    {
+      "group": "T2-格式化与压缩",
+      "name": "escapeNonAscii 转义中文",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\n  \"a\": \"\\u4e2d\"\n}"
+    },
+    {
+      "group": "T2-转义幂等",
+      "name": "unescape(escape(x))===x :: \"a\\nb\\tc\\\"d\\\\e中/f\\bg\\fh\"",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"a\\nb\\tc\\\"d\\\\e中/f\\bg\\fh\""
+    },
+    {
+      "group": "T2-转义幂等",
+      "name": "escape(unescape(esc))===esc :: \"a\\nb\\tc\\\"d\\\\e中/f\\bg\\fh\"",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"\\\"a\\\\nb\\\\tc\\\\\\\"d\\\\\\\\e中/f\\\\bg\\\\fh\\\"\""
+    },
+    {
+      "group": "T2-转义幂等",
+      "name": "unescape(escape(x))===x :: \"中文测试\"",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"中文测试\""
+    },
+    {
+      "group": "T2-转义幂等",
+      "name": "escape(unescape(esc))===esc :: \"中文测试\"",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"\\\"中文测试\\\"\""
+    },
+    {
+      "group": "T2-转义幂等",
+      "name": "unescape(escape(x))===x :: \"no special\"",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"no special\""
+    },
+    {
+      "group": "T2-转义幂等",
+      "name": "escape(unescape(esc))===esc :: \"no special\"",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"\\\"no special\\\"\""
+    },
+    {
+      "group": "T2-转义幂等",
+      "name": "unicodeEscape/Unescape 中文往返",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\\u4e2d\\u6587A"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "YAML 往返等价",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"y\":\"app:\\n  name: JSON 工具箱\\n  version: 1.0.0\\n  debug: false\\nlist:\\n  - 1\\n  - 2\\n  - 3\\n'n': 42\\ns: x\\n\",\"back\":{\"app\":{\"name\":\"JSON 工具箱\",\"version\":\"1.0.0\",\"debug\":false},\"list\":[1,2,3],\"n\":42,\"s\":\"x\"}}"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "TOML 往返等价",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"text\":\"title = \\\"t\\\"\\nnums = [ 1, 2, 3 ]\\n\\n[owner]\\nname = \\\"x\\\"\\nage = 3\\n\",\"back\":{\"title\":\"t\",\"nums\":[1,2,3],\"owner\":{\"name\":\"x\",\"age\":3}}}"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "XML 往返（属性+文本+嵌套+数组）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"xml\":\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?>\\n<root id=\\\"1\\\">\\n  hello\\n  <item k=\\\"a\\\">A</item>\\n  <item k=\\\"b\\\">B</item>\\n  <nested>\\n    <deep>\\n      <v>1</v>\\n    </deep>\\n  </nested>\\n</root>\",\"back\":{\"root\":{\"@_id\":1,\"item\":[{\"…"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "XML &<> 实体转义往返",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"xml\":\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?>\\n<root>\\n  <v>a &amp; b &lt; c &gt; d \\\"e\\\"</v>\\n</root>\",\"back\":{\"root\":{\"v\":\"a & b < c > d \\\"e\\\"\"}}}"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "XML CDATA 解析",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"r\":{\"v\":\"a < b & c\"}}"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "XML 空数组：类型丢失为 {} 且已告警（已知限制）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"xml\":\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?>\\n<root>\\n  <empty/>\\n</root>\",\"back\":{\"root\":{\"empty\":{}}}}"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "XML null：类型丢失为 {} 且已告警（已知限制）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"xml\":\"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?>\\n<root>\\n  <n/>\\n</root>\",\"back\":{\"root\":{\"n\":{}}}}"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "CSV 往返等价（含逗号/引号）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"csv\":\"id,name,note\\n1,张三,\\\"a,b\\\"\\n2,李四,\\\"x\\\"\\\"y\\\"\",\"back\":[{\"id\":1,\"name\":\"张三\",\"note\":\"a,b\"},{\"id\":2,\"name\":\"李四\",\"note\":\"x\\\"y\"}]}"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "QueryString repeat 往返（数组→合并）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"q\":\"a=1&b=x%20y&c=p&c=q\",\"back\":{\"a\":1,\"b\":\"x y\",\"c\":[\"p\",\"q\"]}}"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "QueryString bracket 往返",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"q\":\"a=1&b=x%20y&c%5B%5D=p&c%5B%5D=q\",\"back\":{\"a\":1,\"b\":\"x y\",\"c\":[\"p\",\"q\"]}}"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "NDJSON 往返等价",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"t\":\"{\\\"a\\\":1}\\n{\\\"b\\\":2}\",\"back\":[{\"a\":1},{\"b\":2}]}"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "Properties 序列化输出键值",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "app.name=x\na.b=1"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "Properties 反解值正确",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"app.name\":\"x\",\"a.b\":1}"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "TOML 含 null 给出告警",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"TOML 不支持 null：以下 2 个字段已丢弃 → b, c.d\"]"
+    },
+    {
+      "group": "T2-convert 往返",
+      "name": "TOML 含 null 不抛异常且输出文本",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"a = 1\\n\\n[c]\\n\""
+    },
+    {
+      "group": "T2-codegen",
+      "name": "TS 生成可信（含 interface）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "export interface Root {\n  id: number;\n  score: number;\n  ok: boolean;\n  tag: null;\n  name: string;\n  empty: null;\n  items: RootItemsItem[];\n  nested: RootNested;\n  aB: number;\n  aB_2: number;\n}\n\nexport interface RootItemsItem {\n  a: any;\n}\n\nexport interface RootNested {\n  other: RootNestedOther;\n}\n\n"
+    },
+    {
+      "group": "T2-codegen",
+      "name": "TS 括号配对",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "不配对"
+    },
+    {
+      "group": "T2-codegen",
+      "name": "Java 括号配对",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "不配对"
+    },
+    {
+      "group": "T2-codegen",
+      "name": "Go 括号配对",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "package main\n\n\n\ntype Root struct {\n\tId int64 `json:\"id\"`\n\tScore float64 `json:\"score\"`\n\tOk bool `json:\"ok\"`\n\tTag interface{} `json:\"tag\"`\n\tName string `json:\"name\"`\n\tEmpty interface{} `json:\"empty\"`\n\t"
+    },
+    {
+      "group": "T2-codegen",
+      "name": "Python 括号配对",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "from dataclasses import dataclass, field\n\nfrom typing import List, Optional, Any\n\n\n\n@dataclass\nclass Root:\n    id_1: int  # 原 JSON 键: \"id\"\n    score: float\n    ok: bool\n    tag: None\n    name: str\n   "
+    },
+    {
+      "group": "T2-codegen",
+      "name": "Rust 括号配对",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "use serde::{Deserialize, Serialize};\n\n\n\n#[derive(Serialize, Deserialize, Debug, Clone)]\npub struct Root {\n    pub id: i64,\n    pub score: f64,\n    pub ok: bool,\n    pub tag: (),\n    pub name: String,\n"
+    },
+    {
+      "group": "T2-codegen",
+      "name": "DDL 含 CREATE TABLE 且括号配对",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "-- MySQL 建表语句（类型由 JSON 推断，仅供参考）\nCREATE TABLE `t` (\n  `id` INT PRIMARY KEY  -- id : integer,\n  `name` VARCHAR(255) NOT NULL  -- name : string,\n  `tags` JSON NOT NULL  -- tags : array,\n  `meta` JSON NOT NULL  -- meta : ref\n);\n\n-- 检测到 1 个嵌套对象类型，已折叠为 JSON 列；如需拆表请手动调整：\n--   RootMeta"
+    },
+    {
+      "group": "T2-codegen",
+      "name": "JSON Schema 可被 JSON.parse",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\n  \"title\": \"Root\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\n      \"type\": \"integer\"\n    },\n    \"score\": {\n      \"type\": \"number\""
+    },
+    {
+      "group": "T2-codegen",
+      "name": "inferValue 数组成员类型不一致 → mixed",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"type\":\"array\",\"item\":{\"type\":\"mixed\"}}"
+    },
+    {
+      "group": "T2-codegen",
+      "name": "inferValue null-only 数组元素 = null",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"type\":\"array\",\"item\":{\"type\":\"null\"}}"
+    },
+    {
+      "group": "T2-codegen",
+      "name": "int/float 混合：a=integer,b=number",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":{\"type\":\"integer\"},\"b\":{\"type\":\"number\"}}"
+    },
+    {
+      "group": "T2-codegen",
+      "name": "字段名冲突不产生重复标识符（a b / aB）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "aB 字段出现 1 次\nexport interface R {\n  aB: number;\n  aB_2: number;\n}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "JSONPath $.store.bicycle.color",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[{\"value\":\"red\",\"path\":\"$.store.bicycle.color\"}]"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "JSONPath $..price",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[5,15]"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "JSONPath $.store.book[*].title",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"A\",\"B\"]"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "JSONPath $['store']['bicycle']['color']",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "JSONPath $..book[0].title",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"A\"]"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "JSONPath $..book[0:2].title (slice)",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"A\",\"B\"]"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "leafPaths 包含 $.store.book[0].title",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"store.book[0].title\",\"store.book[0].price\",\"store.book[1].title\",\"store.book[1].price\",\"store.bicycle.color\"]"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "getByPath(data.list[0].name)",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "getByPath($.a.b) 两种写法",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "pickKeys 按层保留指定键",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":1}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "omitKeys 通配 *",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":1,\"keep\":3}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "collectKeys 递归收集",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[{\"path\":\"$.a.id\",\"key\":\"id\",\"value\":1},{\"path\":\"$.id\",\"key\":\"id\",\"value\":2}]"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "groupBy 分组计数",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[[\"x\",2],[\"y\",1]]"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "aggregate 数值统计",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"field\":\"p\",\"count\":3,\"sum\":9,\"avg\":3,\"min\":1,\"max\":5}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "deepMerge overwrite",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":{\"x\":2,\"y\":3},\"k\":1}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "deepMerge keep",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":1,\"b\":3}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "deepMerge concat 数组",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":[1,2,3]}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "diff 检出 changed/added",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[{\"path\":\"$.b\",\"type\":\"changed\",\"left\":2,\"right\":3},{\"path\":\"$.c\",\"type\":\"added\",\"right\":4}]"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "applyPatch add",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "applyPatch remove",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "applyPatch replace",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "applyPatch move",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "applyPatch copy",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "applyPatch add 数组 - 追加",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":[1,2]}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "applyPatch test 通过",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "applyPatch test 失败抛错",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "true"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "applyPatch 根路径替换",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"z\":9}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "flatten 嵌套→扁平",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a.b\":1}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "flatten+unflatten 往返（无数组）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":{\"b\":1,\"c\":{\"d\":2}}}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "flatten arrays:true 展平数组",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a[0]\":10,\"a[1]\":20}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "unflatten 还原数组（往返）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":[10,20]}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "dedupe 按值",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "dedupe 按字段",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "sortArray 按值升序",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "sortArray 按值降序",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "sortArray 按字段",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "sortKeysDeep 递归",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "cleanNulls 删 null",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"b\":1}"
+    },
+    {
+      "group": "T2-json 操作",
+      "name": "cleanNulls 多选删空串/空数组",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"c\":1}"
+    },
+    {
+      "group": "T2-codec",
+      "name": "Base64 中文往返",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "中文字符"
+    },
+    {
+      "group": "T2-codec",
+      "name": "Base64 \"abc\" = \"YWJj\"",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "YWJj"
+    },
+    {
+      "group": "T2-codec",
+      "name": "Base64 URL-safe 编码",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "Pz8-Pg=="
+    },
+    {
+      "group": "T2-codec",
+      "name": "Base64 noPadding 无 =",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "YQ"
+    },
+    {
+      "group": "T2-codec",
+      "name": "Base64 解码无 padding（YWJj 已无填充）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "abc"
+    },
+    {
+      "group": "T2-codec",
+      "name": "Base64 解码无 padding(\"YQ\")=a",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "a"
+    },
+    {
+      "group": "T2-codec",
+      "name": "Base64 非法字符被忽略",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "abc"
+    },
+    {
+      "group": "T2-codec",
+      "name": "URL encode/decode 往返",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "a b&c=中"
+    },
+    {
+      "group": "T2-codec",
+      "name": "URL encodeURI 保留 /",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "a/b%20c"
+    },
+    {
+      "group": "T2-codec",
+      "name": "HTML 编解码往返",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "&lt;a&gt;&amp;&quot;&#x4E2D;"
+    },
+    {
+      "group": "T2-codec",
+      "name": "HTML 十六进制实体解码",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "中"
+    },
+    {
+      "group": "T2-codec",
+      "name": "HTML 十进制实体解码",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "中"
+    },
+    {
+      "group": "T2-codec",
+      "name": "HTML 命名实体解码",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "&<>\""
+    },
+    {
+      "group": "T2-codec",
+      "name": "JWT 过期判定 expired=true",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"警告：Token 已于 2026-09-24T13:08:20.000Z 过期\"]"
+    },
+    {
+      "group": "T2-codec",
+      "name": "JWT 未过期 expired=false",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"header\":{\"alg\":\"HS256\"},\"payload\":{\"sub\":\"1\",\"exp\":1790265400},\"signature\":\"sig\",\"meta\":{\"exp\":{\"value\":1790265400,\"readable\":\"2026-09-24T15:56:40.000Z\"}},\"notices\":[\"正常：Token 未过期，将于 2026-09-24T15:56:40.000Z 过期\"],\"expired\":false}"
+    },
+    {
+      "group": "T2-codec",
+      "name": "JWT nbf 未生效告警",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"警告：Token 尚未生效（nbf=2026-09-24T15:56:40.000Z）\"]"
+    },
+    {
+      "group": "T2-codec",
+      "name": "JWT alg:none 告警",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"警告：算法为 none，存在安全风险\",\"警告：缺少签名段（signature）\"]"
+    },
+    {
+      "group": "T2-codec",
+      "name": "timestamp 秒自动识别",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "\"seconds\""
+    },
+    {
+      "group": "T2-codec",
+      "name": "timestamp 毫秒自动识别",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-codec",
+      "name": "timestamp 0 → 1970",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "1970-01-01T00:00:00.000Z"
+    },
+    {
+      "group": "T2-codec",
+      "name": "timestamp 负值不抛异常",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-codec",
+      "name": "timestamp 2038 之后可用",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "2049-03-22T04:26:40.000Z"
+    },
+    {
+      "group": "T2-codec",
+      "name": "dateToTimestamp 往返(秒)",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-codec",
+      "name": "UUID v4 格式合法",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "dac73e5c-3084-473d-84b2-d714a22e8c0e"
+    },
+    {
+      "group": "T2-codec",
+      "name": "UUID 1000 个无重复",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "唯一数=1000"
+    },
+    {
+      "group": "T2-codec",
+      "name": "regex 全局匹配计数",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"matches\":[{\"match\":\"a1\",\"index\":0,\"length\":2,\"groups\":[\"a\",\"1\"],\"named\":null},{\"match\":\"b2\",\"index\":3,\"length\":2,\"groups\":[\"b\",\"2\"],\"named\":null}],\"count\":2,\"source\":\"(\\\\w)(\\\\d)\",\"flags\":\"g\",\"global\":true}"
+    },
+    {
+      "group": "T2-codec",
+      "name": "regex 分组捕获",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"match\":\"a1\",\"index\":0,\"length\":2,\"groups\":[\"a\",\"1\"],\"named\":null}"
+    },
+    {
+      "group": "T2-codec",
+      "name": "parseLiteral 解析转义",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"value\":\"a\\nb\",\"quoted\":true}"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "validateSyntax 合法",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "validateSyntax 非法含行号",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"valid\":false,\"error\":\"Unexpected token '}', \\\"{\\\"a\\\":}\\\" is not valid JSON\",\"line\":1,\"column\":6,\"snippet\":[{\"line\":1,\"text\":\"{\\\"a\\\":}\",\"current\":true}],\"position\":5}"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "findDuplicateKeys 检出 2 处",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[{\"path\":\"$.a\",\"key\":\"a\",\"firstPos\":4,\"dupPos\":10},{\"path\":\"$.b.c\",\"key\":\"c\",\"firstPos\":21,\"dupPos\":27}]"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "validateSchema 检出错误数 = 5",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"$.name:长度小于 2\",\"$.age:小于最小值 0\",\"$.role:取值不在枚举范围：[\\\"a\\\",\\\"b\\\"]\",\"$.email:不符合 format:email\",\"$.tags[1]:元素重复\"]"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "validateSchema 关键错误路径准确($.name,$.age,$.role,$.email,$.tags[1])",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"$.name\",\"$.age\",\"$.role\",\"$.email\",\"$.tags[1]\"]"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "validateSchema anyOf 通过",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "validateSchema anyOf 失败",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "validateSchema oneOf 恰好1个通过",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"valid\":true,\"errors\":[]}"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "validateSchema allOf 全满足",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "stats 节点数 = 7",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "nodes=7"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "stats 最大深度 = 3",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "maxDepth=3"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "stats 类型分布 object=2,array=1,number=4",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"object\":2,\"array\":1,\"string\":0,\"number\":4,\"boolean\":0,\"null\":0}"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "anomaly 检出 null/空串/空数组/空对象",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"null\":1,\"emptyString\":1,\"emptyArray\":1,\"emptyObject\":1}"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "security 命中 password/token 敏感字段",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[{\"path\":\"$.password\",\"key\":\"password\",\"valuePreview\":\"secret123\"},{\"path\":\"$.token\",\"key\":\"token\",\"valuePreview\":\"eyJhbGciOiJIUzI1NiJ9.eyJhIjoxfQ.x\"}]"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "security 命中明文密码",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[{\"path\":\"$.password\",\"length\":9}]"
+    },
+    {
+      "group": "T2-analyze",
+      "name": "size 压缩后更小",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"original\":{\"chars\":8,\"bytes\":8},\"formatted\":{\"chars\":12,\"bytes\":12},\"minified\":{\"chars\":7,\"bytes\":7},\"savedByMinify\":1,\"minifyRatio\":12.5,\"prettyRatio\":1.71}"
+    },
+    {
+      "group": "T2-全量68工具输入健壮性",
+      "name": "68 工具 × 7 非法输入：无异常且均有返回",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "0"
+    },
+    {
+      "group": "T2-全量68工具输入健壮性",
+      "name": "工具执行摘要",
+      "pass": true,
+      "expected": "",
+      "actual": "[{\"id\":\"format-pretty\",\"cat\":\"format\",\"error\":false,\"outLen\":192,\"errMsg\":\"\"},{\"id\":\"format-minify\",\"cat\":\"format\",\"error\":false,\"outLen\":107,\"errMsg\":\"\"},{\"id\":\"format-escape\",\"cat\":\"format\",\"error\":false,\"outLen\":135,\"errMsg\":\"\"},{\"id\":\"format-unescape\",\"cat\":\"format\",\"error\":false,\"outLen\":107,\"errMsg\":\"\"},{\"id\":\"format-unicode\",\"cat\":\"format\",\"error\":false,\"outLen\":107,\"errMsg\":\"\"},{\"id\":\"format-lax\",\"cat\":\"format\",\"error\":false,\"outLen\":192,\"errMsg\":\"\"},{\"id\":\"format-sort-keys\",\"cat\":\"format\",\"error\":false,\"outLen\":192,\"errMsg\":\"\"},{\"id\":\"format-sort-array\",\"cat\":\"format\",\"error\":false,\"outLen\":192,\"errMsg\":\"\"},{\"id\":\"format-dedupe\",\"cat\":\"format\",\"error\":false,\"outLen\":192,\"errMsg\":\"\"},{\"id\":\"format-flatten\",\"cat\":\"format\",\"error\":false,\"outLen\":236,\"errMsg\":\"\"},{\"id\":\"format-null-clean\",\"cat\":\"format\",\"error\":false,\"outLen\":192,\"errMsg\":\"\"},{\"id\":\"format-default-fill\",\"cat\":\"format\",\"error\":false,\"outLen\":46,\"errMsg\":\"\"},{\"id\":\"format-single-line\",\"cat\":\"format\",\"error\":false,\"outLen\":107,\"errMsg\":\"\"},{\"id\":\"convert-yaml\",\"cat\":\"convert\",\"error\":false,\"outLen\":112,\"errMsg\":\"\"},{\"id\":\"convert-toml\",\"cat\":\"convert\",\"error\":true,\"outLen\":0,\"errMsg\":\"TOML 的顶层结构必须是对象（table）：stringify can only be called with an object\"},{\"id\":\"convert-xml\",\"cat\":\"convert\",\"error\":false,\"outLen\":228,\"errMsg\":\"\"},{\"id\":\"convert-csv\",\"cat\":\"convert\",\"error\":false,\"outLen\":59,\"errMsg\":\"\"},{\"id\":\"convert-querystring\",\"cat\":\"convert\",\"error\":false,\"outLen\":89,\"errMsg\":\"\"},{\"id\":\"convert-properties\",\"cat\":\"convert\",\"error\":false,\"outLen\":86,\"errMsg\":\"\"},{\"id\":\"convert-ndjson\",\"cat\":\"convert\",\"error\":false,\"outLen\":105,\"errMsg\":\"\"},{\"id\":\"convert-md\",\"cat\":\"convert\",\"error\":false,\"outLen\":123,\"errMsg\":\"\"},{\"id\":\"convert-ts\",\"cat\":\"convert\",\"error\":false,\"outLen\":138,\"errMsg\":\"\"},{\"id\":\"convert-java\",\"cat\":\"convert\",\"error\":false,\"outLen\":265,\"errMsg\":\"\"},{\"id\":\"convert-kotlin\",\"cat\":\"convert\",\"error\":false,\"outLen\":162,\"errMsg\":\"\"},{\"id\":\"convert-go\",\"cat\":\"convert\",\"error\":false,\"outLen\":198,\"errMsg\":\"\"},{\"id\":\"convert-python\",\"cat\":\"convert\",\"error\":false,\"outLen\":229,\"errMsg\":\"\"},{\"id\":\"convert-csharp\",\"cat\":\"convert\",\"error\":false,\"outLen\":306,\"errMsg\":\"\"},{\"id\":\"convert-rust\",\"cat\":\"convert\",\"error\":false,\"outLen\":258,\"errMsg\":\"\"},{\"id\":\"convert-swift\",\"cat\":\"convert\",\"error\":false,\"outLen\":160,\"errMsg\":\"\"},{\"id\":\"convert-dart\",\"cat\":\"convert\",\"error\":false,\"outLen\":606,\"errMsg\":\"\"},{\"id\":\"convert-php\",\"cat\":\"convert\",\"error\":false,\"outLen\":157,\"errMsg\":\"\"},{\"id\":\"convert-ddl\",\"cat\":\"convert\",\"error\":false,\"outLen\":279,\"errMsg\":\"\"},{\"id\":\"convert-schema\",\"cat\":\"convert\",\"error\":false,\"outLen\":560,\"errMsg\":\"\"},{\"id\":\"query-jsonpath\",\"cat\":\"query\",\"error\":false,\"outLen\":16,\"errMsg\":\"\"},{\"id\":\"query-paths\",\"cat\":\"query\",\"error\":false,\"outLen\":86,\"errMsg\":\"\"},{\"id\":\"query-get\",\"cat\":\"query\",\"error\":false,\"outLen\":8,\"errMsg\":\"\"},{\"id\":\"query-keys\",\"cat\":\"query\",\"error\":false,\"outLen\":167,\"errMsg\":\"\"},{\"id\":\"query-values\",\"cat\":\"query\",\"error\":false,\"outLen\":149,\"errMsg\":\"\"},{\"id\":\"query-collect\",\"cat\":\"query\",\"error\":false,\"outLen\":216,\"errMsg\":\"\"},{\"id\":\"query-pick\",\"cat\":\"query\",\"error\":false,\"outLen\":14,\"errMsg\":\"\"},{\"id\":\"query-omit\",\"cat\":\"query\",\"error\":false,\"outLen\":192,\"errMsg\":\"\"},{\"id\":\"query-pluck\",\"cat\":\"query\",\"error\":false,\"outLen\":16,\"errMsg\":\"\"},{\"id\":\"query-group\",\"cat\":\"query\",\"error\":false,\"outLen\":368,\"errMsg\":\"\"},{\"id\":\"query-aggregate\",\"cat\":\"query\",\"error\":false,\"outLen\":103,\"errMsg\":\"\"},{\"id\":\"query-merge\",\"cat\":\"query\",\"error\":false,\"outLen\":19,\"errMsg\":\"\"},{\"id\":\"query-patch\",\"cat\":\"query\",\"error\":false,\"outLen\":197,\"errMsg\":\"\"},{\"id\":\"validate-syntax\",\"cat\":\"validate\",\"error\":false,\"outLen\":43,\"errMsg\":\"\"},{\"id\":\"validate-duplicate-keys\",\"cat\":\"validate\",\"error\":false,\"outLen\":10,\"errMsg\":\"\"},{\"id\":\"validate-schema\",\"cat\":\"validate\",\"error\":false,\"outLen\":43,\"errMsg\":\"\"},{\"id\":\"validate-stats\",\"cat\":\"validate\",\"error\":false,\"outLen\":255,\"errMsg\":\"\"},{\"id\":\"validate-size\",\"cat\":\"validate\",\"error\":false,\"outLen\":132,\"errMsg\":\"\"},{\"id\":\"validate-anomaly\",\"cat\":\"validate\",\"error\":false,\"outLen\":92,\"errMsg\":\"\"},{\"id\":\"validate-security\",\"cat\":\"validate\",\"error\":false,\"outLen\":28,\"errMsg\":\"\"},{\"id\":\"validate-diff\",\"cat\":\"validate\",\"error\":false,\"outLen\":7,\"errMsg\":\"\"},{\"id\":\"validate-example\",\"cat\":\"validate\",\"error\":false,\"outLen\":192,\"errMsg\":\"\"},{\"id\":\"codec-base64\",\"cat\":\"codec\",\"error\":false,\"outLen\":144,\"errMsg\":\"\"},{\"id\":\"codec-url\",\"cat\":\"codec\",\"error\":false,\"outLen\":217,\"errMsg\":\"\"},{\"id\":\"codec-html\",\"cat\":\"codec\",\"error\":false,\"outLen\":237,\"errMsg\":\"\"},{\"id\":\"codec-jwt\",\"cat\":\"codec\",\"error\":true,\"outLen\":0,\"errMsg\":\"Header 段解码失败：Unexpected token 'ɝ', \\\"ɝgjgѱʫ{\\\" is not valid JSON\"},{\"id\":\"codec-timestamp\",\"cat\":\"codec\",\"error\":true,\"outLen\":0,\"errMsg\":\"不是合法的时间戳：[{\\\"id\\\":1,\\\"name\\\":\\\"x\\\",\\\"score\\\":1.5,\\\"ok\\\":true,\\\"tags\\\":[\\\"a\\\"]},{\\\"id\\\":2,\\\"name\\\":\\\"y\\\",\\\"score\\\":2,\\\"ok\\\":false,\\\"tags\\\":[]}]\"},{\"id\":\"codec-hash\",\"cat\":\"codec\",\"error\":false,\"outLen\":0,\"errMsg\":\"\"},{\"id\":\"codec-uuid\",\"cat\":\"codec\",\"error\":false,\"outLen\":184,\"errMsg\":\"\"},{\"id\":\"codec-regex\",\"cat\":\"codec\",\"error\":false,\"outLen\":132,\"errMsg\":\"\"},{\"id\":\"codec-string\",\"cat\":\"codec\",\"error\":false,\"outLen\":135,\"errMsg\":\"\"},{\"id\":\"utility-mock\",\"cat\":\"utility\",\"error\":false,\"outLen\":427,\"errMsg\":\"\"},{\"id\":\"utility-shuffle\",\"cat\":\"utility\",\"error\":false,\"outLen\":192,\"errMsg\":\"\"},{\"id\":\"utility-split\",\"cat\":\"utility\",\"error\":false,\"outLen\":232,\"errMsg\":\"\"},{\"id\":\"utility-sample\",\"cat\":\"utility\",\"error\":false,\"outLen\":192,\"errMsg\":\"\"}]"
+    },
+    {
+      "group": "T2-压力与边界",
+      "name": "深嵌套30层 stats 不异常",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "depth=32"
+    },
+    {
+      "group": "T2-压力与边界",
+      "name": "深嵌套30层 stringify OK",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "2322"
+    },
+    {
+      "group": "T2-压力与边界",
+      "name": "深嵌套30层 JSONPath 不异常",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "T2-压力与边界",
+      "name": "大数组2000条各项操作不异常且限时",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "nodes=10001, groups=7, sum=2998500, strLen=149041, 6ms"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P1 修复：无 D.modal 残留",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "0 处"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P1 修复：JT.modal 用法存在",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P2-1 修复：run() 清两侧错误条",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P2-2 修复：parseFlatKey 存在且无 __arr",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "parseFlatKey=true __arr=false"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P2-3 修复：codegen uniqueField 存在",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P2-3 修复：registry runCodegen 存在",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P3-1 修复：flatten 输出 a[i] 形式",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P3-2 修复：collectXmlLossy 存在",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P3-3 升级：favicon 指向真实文件且存在",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P3-4 修复：setViewToggle + 树形默认",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P3-5 修复：toast 上限=3",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "P3-6 修复：启动.bat 引号+探测",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-修复核验(静态)",
+      "name": "加固：main.py 使用 _MEIPASS",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-P2-2 flatten/unflatten 属性测试(严格键)",
+      "name": "250 随机样本 flatten/unflatten 往返深等价（严格键）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "样本数=250 全部通过"
+    },
+    {
+      "group": "R2-P2-2 flatten/unflatten 属性测试(严格键)",
+      "name": "往返输出不含 __arr 内部字段",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "leak=0"
+    },
+    {
+      "group": "R2-P2-2 属性测试(含点键·边界观察)",
+      "name": "含点键样本：往返失败率已记录（分隔符冲突属固有歧义）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "total=200 mismatch=127 首个反例={\"input\":{\"c 用户\":\"str23\",\"b\":[[[],{\"用户.用户\":55.6},{\"b.beta\":{\"用户 字段\":{\"beta\":null,\"用户 beta.名字\":79,\"alpha alpha1\":\"str8\",\"a1\":47.2}},\"名字\":false,\"用户 c\":[[\"\",\"\",96],78]}],false,{\"a val\":{\"beta\":27,\"beta alpha5\":\"str38\",\"gamma\":null,\"用户\":12.1},\"beta\":47.2,\"beta.n\":[null,[[],[]],{\"n.gamma\":null}],\"名字.a9\":{\"alpha n\":\"str50\",\"alpha\":79,\"b gamma.key\":\"\"}}],\"名字\":true},\"flat\":{\"c 用户\":\"str23\",\"b[0][0]\":[],\"b["
+    },
+    {
+      "group": "R2-P3-1 展平数组路径",
+      "name": "展平只输出规范写法 a[0]（不含 .数字）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a[0]\":10,\"a[1]\":20}"
+    },
+    {
+      "group": "R2-P3-1 展平数组路径",
+      "name": "unflatten 兼容旧写法 a.[0]",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":[10,20]}"
+    },
+    {
+      "group": "R2-P3-1 展平数组路径",
+      "name": "unflatten 兼容新写法 a[0]",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":[10,20]}"
+    },
+    {
+      "group": "R2-P3-1 展平数组路径",
+      "name": "两种写法还原结果一致",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "TS 字段名无重复且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"unique\":true,\"len\":105}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Java 字段名无重复且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"unique\":true,\"len\":151}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Kotlin 字段名无重复且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"unique\":true,\"len\":112}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Go 字段名无重复且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"unique\":true,\"len\":158}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Python 字段名无重复且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"unique\":true,\"len\":190}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "CSharp 字段名无重复且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"unique\":true,\"len\":188}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Rust 字段名无重复且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"unique\":true,\"len\":289}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Swift 字段名无重复且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"unique\":true,\"len\":293}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Dart 字段名无重复且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"unique\":true,\"len\":551}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Php 字段名无重复且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"unique\":true,\"len\":136}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "DDL 字段名无重复且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"unique\":true,\"len\":266}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "冲突被记录到 report",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"字段名冲突：JSON 键「aB」的生成名「aB」与同结构内其他字段重复，已重命名为「aB_2」以避免冲突（原始键名仍通过注解/映射保留）。\",\"字段名冲突：JSON 键「a-b」的生成名「aB」与同结构内其他字段重复，已重命名为「aB_3」以避免冲突（原始键名仍通过注解/映射保留）。\",\"字段「class」是 Java 保留字，已重命名为「class_1」（原键已保留在 @JsonProperty）。\"]"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Java 保留 @JsonProperty(\"a b\")",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "import com.fasterxml.jackson.annotation.JsonProperty;\n\npublic class Root {\n    @JsonProperty(\"a b\")\n    private Integer aB;\n    @JsonProperty(\"aB\")\n    private Integer aB_2;\n    @JsonProperty(\"a-b\")\n "
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Java 二次冲突命名为 aB_2",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "import com.fasterxml.jackson.annotation.JsonProperty;\n\npublic class Root {\n    @JsonProperty(\"a b\")\n    private Integer aB;\n    @JsonProperty(\"aB\")\n    private Integer aB_2;\n    @JsonProperty(\"a-b\")\n    private Integer aB_3;\n    @JsonProperty(\"class\""
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Go 保留 json:\"a b\" 标签",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "package main\n\n\n\ntype Root struct {\n\tAB int64 `json:\"a b\"`\n\tAB2 int64 `json:\"aB\"`\n\tAB3 int64 `json:\"a-b\"`\n\tClass int64 `json:\"class\"`\n\t中文键 int64 `json:\"中文键\"`\n}"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "Rust 保留 #[serde(rename = \"a b\")]",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "use serde::{Deserialize, Serialize};\n\n\n\n#[derive(Serialize, Deserialize, Debug, Clone)]\npub struct Root {\n    #[serde(rename = \"a b\")]\n    pub a_b: i64,\n    #[serde(rename = \"aB\")]\n    pub a_b_2: i64,\n    #[serde(rename "
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "二次冲突后仍无重名",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"aB\",\"aB_2\",\"aB2\"]"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "registry 11 个代码生成工具无错误且非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "all-ok"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "registry convert-java 汇入重名 notice",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"字段名冲突：JSON 键「aB」的生成名「aB」与同结构内其他字段重复，已重命名为「aB_2」以避免冲突（原始键名仍通过注解/映射保留）。\",\"字段名冲突：JSON 键「a-b」的生成名「aB」与同结构内其他字段重复，已重命名为「aB_3」以避免冲突（原始键名仍通过注解/映射保留）。\",\"字段「class」是 Java 保留字，已重命名为「class_1」（原键已保留在 @JsonProperty）。\"]"
+    },
+    {
+      "group": "R2-P2-3 codegen 字段名唯一性",
+      "name": "观察：生成字段是否含保留字 class",
+      "pass": true,
+      "expected": "记录",
+      "actual": "{\"java\":false,\"python\":false,\"javaSnippet\":\"public class Root {\",\"pySnippet\":\"\"}"
+    },
+    {
+      "group": "R2-P3-2 XML 无损性告警",
+      "name": "XML null/空数组/空串告警非空且说明原因",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"XML 无法无损表达 null / 空数组 / 空字符串：以下 3 处将转为空元素 <../>，再转回 JSON 时会得到 {}。位置：a、b、c。\"]"
+    },
+    {
+      "group": "R2-P3-2 XML 无损性告警",
+      "name": "XML 转换不抛异常且输出非空",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root>\n  <a/>\n  <b/>\n  <c/>\n</root>"
+    },
+    {
+      "group": "R2-P3-2 XML 无损性告警",
+      "name": "convert-xml 工具 notices 透传",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"XML 无法无损表达 null / 空数组 / 空字符串：以下 3 处将转为空元素 <../>，再转回 JSON 时会得到 {}。位置：a、b、c。\"]"
+    },
+    {
+      "group": "R2-P3-5 toast 数量上限/去重",
+      "name": "连发 6 条后同屏 toast ≤ 3",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "count=3"
+    },
+    {
+      "group": "R2-P3-5 toast 数量上限/去重",
+      "name": "相同内容 1.5s 内只保留 1 条",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "dupCount=1"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "树: buildNode(key,value,path,depth,expandTo) 返回句柄",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "树: 默认展开深度 expandTo = n>3000?0:(singleRoot?2:1)",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "树: expandAll budget=20000 + collapseAll",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "树: 顶部「全部展开/全部折叠」按钮",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "滚动: applyText 末尾正文+行号槽 scrollTop 归零",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "保留字: RESERVED 覆盖 11 语言",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "11 语言"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "保留字: uniqueField 命中追加 _1 且置 reserved",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "保留字: 字段对象带 reserved 标记",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "保留字: 生成器注入 opts.lang（≥11 处）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "11 处"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "Swift/Dart: 已无 toCamel(f.name)，改用 f.name",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "registry: flatten separator 为下拉",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "registry: flatten desc 含分隔符往返提示",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-修复核验(静态)",
+      "name": "CSS: .jt-tree-bar / .jt-tree-bar-btn 样式存在",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "TypeScript: 声明标识符均为合法（无裸保留字/无重复）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"n\":12,\"bareReserved\":[],\"dup\":[],\"names\":[\"class_1\",\"int\",\"public_1\",\"default_1\",\"func\",\"if_1\",\"for_1\",\"return_1\",\"var_1\",\"fun\",\"type_1\",\"interface_1\"]}"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "TypeScript: 保留字改名写入 notices 且含原键说明",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "report=9 :: 字段「class」是 TypeScript 保留字，已重命名为「class_1」（原键已保留在 JSON 原键（TypeScript 无注解机制，序列化层需自行映射））。"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Java: 声明标识符均为合法（无裸保留字/无重复）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"n\":12,\"bareReserved\":[],\"dup\":[],\"names\":[\"class_1\",\"int_1\",\"public_1\",\"default_1\",\"func\",\"if_1\",\"for_1\",\"return_1\",\"var_1\",\"fun\",\"type\",\"interface_1\"]}"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Java: 保留字改名写入 notices 且含原键说明",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "report=9 :: 字段「class」是 Java 保留字，已重命名为「class_1」（原键已保留在 @JsonProperty）。"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Kotlin: 声明标识符均为合法（无裸保留字/无重复）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"n\":12,\"bareReserved\":[],\"dup\":[],\"names\":[\"class_1\",\"int\",\"public_1\",\"default\",\"func\",\"if_1\",\"for_1\",\"return_1\",\"var_1\",\"fun_1\",\"type\",\"interface_1\"]}"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Kotlin: 保留字改名写入 notices 且含原键说明",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "report=8 :: 字段「class」是 Kotlin 保留字，已重命名为「class_1」（原键已保留在 @JsonProperty（勾选「@JsonProperty 注解」参数后生成））。"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Go: 声明标识符均为合法（无裸保留字/无重复）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"n\":12,\"bareReserved\":[],\"dup\":[],\"names\":[\"Class\",\"Int1\",\"Public\",\"Default1\",\"Func1\",\"If1\",\"For1\",\"Return1\",\"Var1\",\"Fun\",\"Type1\",\"Interface1\"]}"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Go: 保留字改名写入 notices 且含原键说明",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "report=9 :: 字段「int」是 Go 保留字，已重命名为「int_1」（原键已保留在 json tag）（Go 导出字段会按规范转为大写驼峰，如 Class1）。"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Python: 声明标识符均为合法（无裸保留字/无重复）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"n\":12,\"bareReserved\":[],\"dup\":[],\"names\":[\"class_1\",\"int_1\",\"public\",\"default\",\"func\",\"if_1\",\"for_1\",\"return_1\",\"var\",\"fun\",\"type_1\",\"interface\"]}"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Python: 保留字改名写入 notices 且含原键说明",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "report=6 :: 字段「class」是 Python 保留字，已重命名为「class_1」（原键已保留在 字段别名 / 行尾注释）。"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "C#: 声明标识符均为合法（无裸保留字/无重复）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"n\":12,\"bareReserved\":[],\"dup\":[],\"names\":[\"Class1\",\"Int1\",\"Public1\",\"Default1\",\"Func\",\"If1\",\"For1\",\"Return1\",\"Var1\",\"Fun\",\"Type\",\"Interface1\"]}"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "C#: 保留字改名写入 notices 且含原键说明",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "report=9 :: 字段「class」是 C# 保留字，已重命名为「class_1」（原键已保留在 JsonPropertyName）（C# 属性会按规范转为大写驼峰，如 Class1）。"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Rust: 声明标识符均为合法（无裸保留字/无重复）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"n\":12,\"bareReserved\":[],\"dup\":[],\"names\":[\"class\",\"int\",\"public\",\"default\",\"func\",\"if_1\",\"for_1\",\"return_1\",\"var\",\"fun\",\"type_1\",\"interface\"]}"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Rust: 保留字改名写入 notices 且含原键说明",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "report=4 :: 字段「if」是 Rust 保留字，已重命名为「if_1」（原键已保留在 serde rename）。"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Swift: 声明标识符均为合法（无裸保留字/无重复）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"n\":12,\"bareReserved\":[],\"dup\":[],\"names\":[\"class_1\",\"int\",\"public_1\",\"default_1\",\"func_1\",\"if_1\",\"for_1\",\"return_1\",\"var_1\",\"fun\",\"type_1\",\"interface\"]}"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Swift: 保留字改名写入 notices 且含原键说明",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "report=9 :: 字段「class」是 Swift 保留字，已重命名为「class_1」（原键已保留在 CodingKeys）。"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Dart: 声明标识符均为合法（无裸保留字/无重复）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"n\":12,\"bareReserved\":[],\"dup\":[],\"names\":[\"class_1\",\"int_1\",\"public\",\"default_1\",\"func\",\"if_1\",\"for_1\",\"return_1\",\"var_1\",\"fun\",\"type_1\",\"interface_1\"]}"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "Dart: 保留字改名写入 notices 且含原键说明",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "report=9 :: 字段「class」是 Dart 保留字，已重命名为「class_1」（原键已保留在 json 键映射（fromJson/toJson 使用原键））。"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "PHP: 声明标识符均为合法（无裸保留字/无重复）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"n\":12,\"bareReserved\":[],\"dup\":[],\"names\":[\"class_1\",\"int_1\",\"public_1\",\"default_1\",\"func\",\"if_1\",\"for_1\",\"return_1\",\"var_1\",\"fun\",\"type_1\",\"interface_1\"]}"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "PHP: 保留字改名写入 notices 且含原键说明",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "report=10 :: 字段「class」是 PHP 保留字，已重命名为「class_1」（原键已保留在 数组键（原键保留））。"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "DDL: 声明标识符均为合法（无裸保留字/无重复）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"n\":12,\"bareReserved\":[],\"dup\":[],\"names\":[\"class\",\"int\",\"public\",\"default_1\",\"func\",\"if\",\"for\",\"return\",\"var\",\"fun\",\"type_1\",\"interface\"]}"
+    },
+    {
+      "group": "R3-保留字转义(11 生成器)",
+      "name": "DDL: 保留字改名写入 notices 且含原键说明",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "report=2 :: 字段「default」是 SQL 保留字，已重命名为「default_1」（原键已保留在 列注释）。"
+    },
+    {
+      "group": "R3-原键映射保留",
+      "name": "Java @JsonProperty(\"class\") + 属性 class_1",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "@JsonProperty(\"class\")"
+    },
+    {
+      "group": "R3-原键映射保留",
+      "name": "Kotlin @JsonProperty(\"class\") val class_1",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-原键映射保留",
+      "name": "Go 保留 json:\"class\" 标签",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "json:\"class\""
+    },
+    {
+      "group": "R3-原键映射保留",
+      "name": "Rust type → #[serde(rename = \"type\")]",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-原键映射保留",
+      "name": "C# JsonPropertyName(\"class\") + Class1",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-原键映射保留",
+      "name": "Swift CodingKeys case class_1 = \"class\"",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-原键映射保留",
+      "name": "Dart class_1: json['class'] 与 'class': class_1",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-原键映射保留",
+      "name": "PHP $class_1",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R3-Swift/Dart 映射自洽性",
+      "name": "Swift 属性名唯一",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"class_1\",\"userName\",\"defaultValue\"]"
+    },
+    {
+      "group": "R3-Swift/Dart 映射自洽性",
+      "name": "Swift 每个 case 名都对应一个属性",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[{\"name\":\"class_1\",\"key\":\"class\"},{\"name\":\"userName\",\"key\":\"userName\"},{\"name\":\"defaultValue\",\"key\":\"default_value\"}]"
+    },
+    {
+      "group": "R3-Swift/Dart 映射自洽性",
+      "name": "Swift class → class_1（不再裸 class）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"class_1\",\"userName\",\"defaultValue\"]"
+    },
+    {
+      "group": "R3-Swift/Dart 映射自洽性",
+      "name": "Swift class_1 ↔ 原键 class",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[{\"name\":\"class_1\",\"key\":\"class\"},{\"name\":\"userName\",\"key\":\"userName\"},{\"name\":\"defaultValue\",\"key\":\"default_value\"}]"
+    },
+    {
+      "group": "R3-Swift/Dart 映射自洽性",
+      "name": "Swift default_value → defaultValue ↔ 原键",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[{\"name\":\"class_1\",\"key\":\"class\"},{\"name\":\"userName\",\"key\":\"userName\"},{\"name\":\"defaultValue\",\"key\":\"default_value\"}]"
+    },
+    {
+      "group": "R3-Swift/Dart 映射自洽性",
+      "name": "Swift 驼峰键 userName 未被多余改写",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"class_1\",\"userName\",\"defaultValue\"]"
+    },
+    {
+      "group": "R3-Swift/Dart 映射自洽性",
+      "name": "Dart 属性唯一 & 构造参数与属性一致",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"dtProps\":[\"class_1\",\"userName\",\"defaultValue\"],\"dtCtor\":[\"class_1\",\"userName\",\"defaultValue\"]}"
+    },
+    {
+      "group": "R3-Swift/Dart 映射自洽性",
+      "name": "Dart fromJson: 属性∈属性集 且 键==原键",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[{\"prop\":\"class_1\",\"key\":\"class\"},{\"prop\":\"userName\",\"key\":\"userName\"},{\"prop\":\"defaultValue\",\"key\":\"default_value\"}]"
+    },
+    {
+      "group": "R3-Swift/Dart 映射自洽性",
+      "name": "Dart toJson: 键==原键 且 值∈属性集",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[{\"key\":\"class\",\"prop\":\"class_1\"},{\"key\":\"userName\",\"prop\":\"userName\"},{\"key\":\"default_value\",\"prop\":\"defaultValue\"}]"
+    },
+    {
+      "group": "R3-Swift/Dart 映射自洽性",
+      "name": "Dart class → class_1",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\"class_1\",\"userName\",\"defaultValue\"]"
+    },
+    {
+      "group": "R3-非保留字回归",
+      "name": "普通键（userName/age）无多余 _1 后缀且保留原名",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "all-ok"
+    },
+    {
+      "group": "R3-非保留字回归",
+      "name": "TS 普通键结构正确（userName/age）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "export interface Root { userName: number; age: number; }"
+    },
+    {
+      "group": "R3-flatten 分隔符",
+      "name": "separator 为下拉且含 4 个选项",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"type\":\"select\",\"opts\":[\".\",\"__\",\"→\",\"/\"]}"
+    },
+    {
+      "group": "R3-flatten 分隔符",
+      "name": "separator 默认值为 .",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "."
+    },
+    {
+      "group": "R3-flatten 分隔符",
+      "name": "separator 选项含 . __ → /",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "[\".\",\"__\",\"→\",\"/\"]"
+    },
+    {
+      "group": "R3-flatten 分隔符",
+      "name": "desc 含分隔符往返提示文案",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a\":{\"b\":1}} ↔ {\"a.b\":1} 双向转换；键名本身含分隔符字符时往返可能不保真，建议改用其他分隔符"
+    },
+    {
+      "group": "R3-flatten 分隔符",
+      "name": "separator=__ 往返深等价",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a.b\":1,\"c\":2,\"d.e\":{\"f.g\":3}}"
+    },
+    {
+      "group": "R3-flatten 分隔符",
+      "name": "separator=. 不保真（固有歧义，desc 已提示）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"a.b\":1,\"c\":2,\"d.e.f.g\":3}"
+    },
+    {
+      "group": "R3-flatten 分隔符",
+      "name": "registry 展平→还原(separator=__) 深等价",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{ \"a.b\": 1, \"c\": 2, \"d.e\": { \"f.g\": 3 } }"
+    },
+    {
+      "group": "R4-修复核验(静态)",
+      "name": "启动.bat: BADPY 分支含 exe 兜底（start + exit /b 0）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R4-修复核验(静态)",
+      "name": "启动.bat: NOTFOUND 分支含 exe 兜底 + 方案三",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R4-修复核验(静态)",
+      "name": "启动.bat: Python 5 级探测优先级未变",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R4-修复核验(静态)",
+      "name": "启动.bat: RUN 分支仍优先 python main.py（exe 不在其前）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R4-修复核验(静态)",
+      "name": "codegen.js: toSwift 用 needKeys 门控",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R4-修复核验(静态)",
+      "name": "codegen.js: 生成 CodingKeys 时为每个属性逐一写 case（枚举内 forEach + case=jsonKey）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R4-修复核验(静态)",
+      "name": "codegen.js: needKeys 为 false 时整块跳过（生成受门控）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R4-修复核验(静态)",
+      "name": "README: dist/ 列入目录结构",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R4-修复核验(静态)",
+      "name": "README: 方式 2 为 dist\\JSON工具箱.exe（无需 Python）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R4-修复核验(静态)",
+      "name": "README: 已知限制新增第 8 条（Swift CodingKeys）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "ok"
+    },
+    {
+      "group": "R4-Swift CodingKeys 全量覆盖",
+      "name": "case 数严格等于存储属性数（3 === 3）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"props\":[\"class_1\",\"userName\",\"defaultValue\"],\"cases\":[{\"name\":\"class_1\",\"key\":\"class\"},{\"name\":\"userName\",\"key\":\"userName\"},{\"name\":\"defaultValue\",\"key\":\"default_value\"}]}"
+    },
+    {
+      "group": "R4-Swift CodingKeys 全量覆盖",
+      "name": "逐条配对①：class_1 ↔ \"class\"",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"class_1\":\"class\",\"userName\":\"userName\",\"defaultValue\":\"default_value\"}"
+    },
+    {
+      "group": "R4-Swift CodingKeys 全量覆盖",
+      "name": "逐条配对②：userName ↔ \"userName\"（未改名也显式写出）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"class_1\":\"class\",\"userName\":\"userName\",\"defaultValue\":\"default_value\"}"
+    },
+    {
+      "group": "R4-Swift CodingKeys 全量覆盖",
+      "name": "逐条配对③：defaultValue ↔ \"default_value\"",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"class_1\":\"class\",\"userName\":\"userName\",\"defaultValue\":\"default_value\"}"
+    },
+    {
+      "group": "R4-Swift CodingKeys 全量覆盖",
+      "name": "每个 case 名都对应一个存储属性",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"props\":[\"class_1\",\"userName\",\"defaultValue\"],\"cases\":[{\"name\":\"class_1\",\"key\":\"class\"},{\"name\":\"userName\",\"key\":\"userName\"},{\"name\":\"defaultValue\",\"key\":\"default_value\"}]}"
+    },
+    {
+      "group": "R4-Swift CodingKeys 全量覆盖",
+      "name": "每个存储属性都被某个 case 覆盖（无遗漏）",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"props\":[\"class_1\",\"userName\",\"defaultValue\"],\"cases\":[{\"name\":\"class_1\",\"key\":\"class\"},{\"name\":\"userName\",\"key\":\"userName\"},{\"name\":\"defaultValue\",\"key\":\"default_value\"}]}"
+    },
+    {
+      "group": "R4-Swift CodingKeys 全量覆盖",
+      "name": "无任何映射（userName/age）→ 完全不生成 CodingKeys",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "struct Root: Codable { let userName: Int let age: Int }"
+    },
+    {
+      "group": "R4-Swift CodingKeys 全量覆盖",
+      "name": "边界 a_b/aB（冲突重命名）：CodingKeys↔属性一一对应且不崩溃",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"props\":[\"aB\",\"aB_2\"],\"cases\":[{\"name\":\"aB\",\"key\":\"a_b\"},{\"name\":\"aB_2\",\"key\":\"aB\"}]}"
+    },
+    {
+      "group": "R4-Swift CodingKeys 全量覆盖",
+      "name": "边界 中文键（名==键）：不生成 CodingKeys 且属性正常",
+      "pass": true,
+      "expected": "truthy",
+      "actual": "{\"props\":[\"中文\"],\"cases\":[]}"
+    }
+  ]
+}

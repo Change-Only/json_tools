@@ -1,16 +1,24 @@
-# 打包产物（可随时用 打包EXE.bat 重新生成）
-dist/
+# 打包中间产物（build/、spec 由 PyInstaller 生成，可随时重建）
+build/
+*.spec
 
-# 本地测试工件与工作台数据
-.qa/
+# 本地工作台数据
 .workbuddy/
 .build/
 
 # Python
 __pycache__/
 *.pyc
-*.spec
-build/
 
-# 临时文件
-*.log
+# .qa 中只保留测试报告、测试脚本、结果 JSON 与截图，以下为临时调试文件
+.qa/*.log
+.qa/exe-served
+.qa/exe-app.js
+.qa/dbg-r4.mjs
+.qa/probe-*.mjs
+.qa/bat-sim.py
+.qa/extract-web.py
+.qa/run-browser-r4.sh
+.qa/r4-exe-run.sh
+.qa/*-round1.json
+.qa/browser-run-round*.log

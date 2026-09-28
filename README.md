@@ -13,8 +13,8 @@ Python 桌面外壳，内置 **68 个**实用工具，覆盖 JSON 的格式化�
 自动探测 Python 并以**无控制台窗口**的原生窗口（pywebview）打开。若未检测到可用的 Python，会**自动改用方式 2**（发行包自带 `dist\JSON工具箱.exe` 时）；两者都不可用时，会提示改用方式 3，并提示安装 Python。
 
 ### 方式 2：直接双击 `dist\JSON工具箱.exe`（无需 Python，推荐）
-由 `打包EXE.bat` 打包生成的**单文件程序**，**双击即用、无需安装任何 Python**，能力与方式 1 一致（本地 HTTP 服务 + 原生窗口 / 浏览器）。当 `启动.bat` 找不到可用 Python 时，也会自动改用本 exe。
-> 说明：exe 属**可选**产物，需先运行 `打包EXE.bat`（自动安装 PyInstaller 并打包）；未打包或打包失败均不影响方式 1 / 方式 3 的使用。
+**单文件程序，双击即用、无需安装任何 Python**，能力与方式 1 一致（本地 HTTP 服务 + 原生窗口 / 浏览器）。当 `启动.bat` 找不到可用 Python 时，也会自动改用本 exe。
+> 说明：exe 已随本仓库提供（见「发行产物与质量报告」），可直接下载使用；也可随时用 `打包EXE.bat` 从源码重新打包。
 
 ### 方式 3：直接双击 `web/index.html`
 无需任何依赖，用系统浏览器打开即可使用（`file://` 协议）。
@@ -145,9 +145,10 @@ JSON工具箱/
 ├── 打包EXE.bat           可选：PyInstaller 打包单文件 exe（产物 dist\JSON工具箱.exe）
 ├── main.py               Python 桌面外壳（本地静态服务 + pywebview）
 ├── README.md             本文件
-├── dist/                 可选：打包产物（JSON工具箱.exe，单文件、免 Python）
+├── dist/                 发行产物：JSON工具箱.exe（单文件、免 Python，与源码逐字节一致性校验）
 ├── assets/               应用图标（app.ico 用于 exe 与窗口，icon_preview.png 为预览图）
 ├── .icon/gen_icon.py     图标生成脚本（纯代码绘制，改配色后重跑即可再生成）
+├── .qa/                  质量报告与测试套件（测试报告 / 可复跑脚本 / 结果 JSON / 界面截图）
 └── web/                  纯静态前端（可直接双击 index.html）
     ├── index.html        SPA 主壳（全部经典 <script>，无 ES module）
     ├── favicon.png       网页图标（与 app.ico 同源设计）
@@ -173,6 +174,25 @@ JSON工具箱/
         ├── tools-registry.js 工具注册表（声明式，68 个工具）
         └── app.js            装配层（布局/路由/事件/快捷键/状态栏）
 ```
+
+### 发行产物与质量报告（随仓库提供）
+
+**`dist/JSON工具箱.exe`** —— 可直接下载使用的单文件程序：
+- 零依赖：内嵌全部前端资源与 Python 运行时，目标机器**无需安装 Python**；
+- 与源码一致：打包后已通过 PyInstaller 归档解包比对，内嵌 `web/` 资源与仓库源码**逐字节一致**；
+- 更新方式：修改源码后运行 `打包EXE.bat` 即可重新生成。
+
+**`.qa/`** —— 四轮「证伪式」质量验证的全部产物：
+
+| 文件 / 目录 | 说明 |
+| --- | --- |
+| `report.md` | 完整测试报告（Round 1–4：缺陷清单、分级、修复核验、遗留项） |
+| `run-tests.mjs` | 单元/静态测试套件，**290 条断言**（覆盖解析、修复、7 种格式双向往返、代码生成、校验、编码等），可用 Node 直接复跑：`node .qa/run-tests.mjs` |
+| `browser-check.mjs` | 真实浏览器端到端测试（playwright-core + Edge），**67 条断言**，用法见文件头部说明 |
+| `unit-results.json` / `browser-results.json` | 最近一轮测试的逐条结果 |
+| `shots/` | 各轮界面截图（`round4/` 为最终状态：首屏、树形视图、深色主题、代码生成等） |
+
+> 测试结论摘要：290 条单元断言 + 67 条浏览器断言全部通过，页面 console 错误 0；68 个工具 × 7 种非法输入全量遍历零异常；exe 内嵌资源与源码字节级比对 18/18 一致。
 
 ---
 

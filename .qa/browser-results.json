@@ -1,0 +1,889 @@
+{
+  "passed": 67,
+  "failed": 0,
+  "results": [
+    {
+      "name": "首屏左侧分类分组可见(6)",
+      "pass": true,
+      "detail": "group=6"
+    },
+    {
+      "name": "首屏工具项总数 = 68",
+      "pass": true,
+      "detail": "nav=68"
+    },
+    {
+      "name": "首屏输入自动载入示例并已美化",
+      "pass": true,
+      "detail": "outLen=804 parse=true"
+    },
+    {
+      "name": "68 工具逐个执行：无空白输出",
+      "pass": true,
+      "detail": "all-ok"
+    },
+    {
+      "name": "68 工具逐个执行：真实报错工具数已记录",
+      "pass": true,
+      "detail": "realErr=3"
+    },
+    {
+      "name": "68 工具遍历期间无 pageerror",
+      "pass": true,
+      "detail": "pageerror=0"
+    },
+    {
+      "name": "切换深色主题：data-theme=dark",
+      "pass": true,
+      "detail": "theme=dark"
+    },
+    {
+      "name": "切换深色主题：背景色确实变化",
+      "pass": true,
+      "detail": "light=rgb(246, 247, 249) dark=rgb(14, 16, 20)"
+    },
+    {
+      "name": "P1 关于弹窗可打开且标题正确",
+      "pass": true,
+      "detail": "{\"visible\":true,\"title\":\"关于 JSON 工具箱\",\"threw\":false}"
+    },
+    {
+      "name": "P1 关于弹窗 Esc 可关闭",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "P1 快捷键弹窗可打开且含条目",
+      "pass": true,
+      "detail": "{\"visible\":true,\"title\":\"快捷键\",\"threw\":false,\"rows\":9}"
+    },
+    {
+      "name": "P1 快捷键弹窗 Esc 可关闭",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "P1 示例库弹窗可打开",
+      "pass": true,
+      "detail": "{\"visible\":true,\"title\":\"示例库\",\"threw\":false}"
+    },
+    {
+      "name": "P1 示例库弹窗 Esc 可关闭",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "P1 历史记录弹窗可打开且含记录",
+      "pass": true,
+      "detail": "{\"visible\":true,\"title\":\"历史记录（最近 50 条）\",\"threw\":false,\"rows\":50}"
+    },
+    {
+      "name": "P1 历史记录弹窗 Esc 可关闭",
+      "pass": true,
+      "detail": "ok"
+    },
+    {
+      "name": "P1 输入区「载入示例」可用且载入后输入变化",
+      "pass": true,
+      "detail": "{\"clicked\":true,\"modalOpen\":true,\"changed\":true,\"len\":734}"
+    },
+    {
+      "name": "P2-1 报错后执行成功工具：两侧错误条均不可见",
+      "pass": true,
+      "detail": "{\"afterErr\":true,\"inErrVisible\":false,\"outErrVisible\":false}"
+    },
+    {
+      "name": "P3-1 展平输出使用规范 a[0] 形式",
+      "pass": true,
+      "detail": "flat=\"{\\n  \\\"a.b\\\": 1,\\n  \\\"list[0]\\\": 10,\\n  \\\"list[1]\\\": 20,\\n  \\\"nested.arr[0].x\\\": 1,\\n  \\\"nested.arr[1].x\\\": 2\\n}\\n\""
+    },
+    {
+      "name": "P2-2/P3-1 展平→还原 UI 全流程深等价",
+      "pass": true,
+      "detail": "back=\"{\\n  \\\"a\\\": {\\n    \\\"b\\\": 1\\n  },\\n  \\\"list\\\": [\\n    10,\\n    20\\n  ],\\n  \\\"nested\\\": {\\n    \\\"arr\\\": [\\n      {\\n        \\\"x\\\": 1\\n      },\\n      {\\n       "
+    },
+    {
+      "name": "P3-4 输出面板出现「文本/树形」切换控件",
+      "pass": true,
+      "detail": "{\"visible\":true,\"labels\":[\"文本\",\"树形\"],\"treeDisabled\":false}"
+    },
+    {
+      "name": "P3-4 点「树形」渲染树节点且可折叠/展开",
+      "pass": true,
+      "detail": "{\"hasTree\":true,\"before\":\"\",\"afterExpand\":\"none\",\"afterCollapse\":\"\",\"childCount\":39}"
+    },
+    {
+      "name": "P3-4 切回「文本」恢复正常",
+      "pass": true,
+      "detail": "{\"tree\":false,\"code\":804}"
+    },
+    {
+      "name": "P3-4 非 JSON 结果：树形切换置灰且有 tooltip",
+      "pass": true,
+      "detail": "{\"treeDisabled\":true,\"cls\":\"jt-seg jt-seg-disabled\",\"tip\":\"当前结果不是 JSON 对象/数组，无法使用树形视图\"}"
+    },
+    {
+      "name": "P3-4 query-jsonpath 默认树形",
+      "pass": true,
+      "detail": "{\"hasTree\":true,\"activeSeg\":\"树形\",\"afterSwitchTree\":false,\"afterSwitchActive\":\"文本\"}"
+    },
+    {
+      "name": "P3-4 切换工具后 viewMode 重置为自动(text for 美化)",
+      "pass": true,
+      "detail": "{\"afterSwitchTree\":false,\"afterSwitchActive\":\"文本\"}"
+    },
+    {
+      "name": "P3-5 连续点复制 6 次：同屏 toast ≤ 3",
+      "pass": true,
+      "detail": "{\"count\":2,\"texts\":[\"命中 3 条结果\",\"已复制到剪贴板\"]}"
+    },
+    {
+      "name": "P3-5 相同内容去重：复制提示仅 1 条",
+      "pass": true,
+      "detail": "[\"命中 3 条结果\",\"已复制到剪贴板\"]"
+    },
+    {
+      "name": "非法 JSON 执行出现错误提示且含行号",
+      "pass": true,
+      "detail": "{\"code\":\"\\n\",\"errBar\":\"第 4 行Expected ',' or '}' after property value in JSON at position 23 (line 4 column 3)\",\"errVisible\":true}"
+    },
+    {
+      "name": "YAML 转换工具输出非空",
+      "pass": true,
+      "detail": "\"- id: 1\\n  name: 张三\\n  email: zhangsan@example.com\\n  age: 28\\n  active: true\\n  tags:\\n    - admin"
+    },
+    {
+      "name": "快捷键 Ctrl+K 聚焦搜索框",
+      "pass": true,
+      "detail": "focused=true"
+    },
+    {
+      "name": "快捷键 Alt+↓ 切换到下一个工具",
+      "pass": true,
+      "detail": "JSON ⇄ YAML → JSON ⇄ TOML"
+    },
+    {
+      "name": "快捷键 Ctrl+Shift+C 复制输出出现提示",
+      "pass": true,
+      "detail": "已复制输出"
+    },
+    {
+      "name": "搜索框过滤左侧列表",
+      "pass": true,
+      "detail": "过滤后=1"
+    },
+    {
+      "name": "刷新后主题被记住(dark)",
+      "pass": true,
+      "detail": "dark"
+    },
+    {
+      "name": "刷新后草稿被记住",
+      "pass": true,
+      "detail": "\"{\\\"persist\\\": true}\""
+    },
+    {
+      "name": "P3-3 无 favicon 404 / 资源错误",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "R3-滚动: 首屏输入区 scrollTop=0（从第 1 行开始）",
+      "pass": true,
+      "detail": "{\"ta\":0,\"g\":0,\"first\":\"[\"}"
+    },
+    {
+      "name": "R3-树: 顶部出现「全部展开/全部折叠」按钮",
+      "pass": true,
+      "detail": "[\"全部展开\",\"全部折叠\"]"
+    },
+    {
+      "name": "R3-树: 默认展开后可见节点 ≥ 8（不再只有折叠根）",
+      "pass": true,
+      "detail": "visibleRows=40"
+    },
+    {
+      "name": "R3-树: 点「全部折叠」后可见节点 = 1（仅根）",
+      "pass": true,
+      "detail": "visibleRows=1"
+    },
+    {
+      "name": "R3-树: 点「全部展开」后可见节点恢复 ≥ 8",
+      "pass": true,
+      "detail": "visibleRows=40"
+    },
+    {
+      "name": "R3-树: >3000 节点大文档根默认展开且提示懒加载（不卡死/不报错）",
+      "pass": true,
+      "detail": "{\"hasTree\":true,\"rows\":401,\"notice\":\"节点数约 3601，已启用懒加载（展开时才渲染子节点）以保护性能。\",\"ms\":13.5}"
+    },
+    {
+      "name": "R3-树: 大文档切树形渲染耗时已记录",
+      "pass": true,
+      "detail": "renderMs≈13.5 可见行=401"
+    },
+    {
+      "name": "R3-树: 极端边界({},[],null,[1],嵌套数组) 不崩溃且无空面板异常",
+      "pass": true,
+      "detail": "[{\"c\":\"{}\",\"clicked\":true,\"hasTree\":true,\"rows\":1,\"err\":false},{\"c\":\"[]\",\"clicked\":true,\"hasTree\":true,\"rows\":1,\"err\":false},{\"c\":\"null\",\"clicked\":false,\"hasTree\":false,\"rows\":-1,\"err\":false},{\"c\":\"[1]\",\"clicked\":true,\"hasTree\":true,\"rows\":2,\"err\":false},{\"c\":\"[[1,2],[3]]\",\"clicked\":true,\"hasTree\":true,\"rows\":6,\"err\":false}]"
+    },
+    {
+      "name": "R3-UI: 深色主题切换生效",
+      "pass": true,
+      "detail": "dark"
+    },
+    {
+      "name": "R3-UI: Java 输出含 @JsonProperty(\"class\") 且无裸 class 标识符",
+      "pass": true,
+      "detail": "import com.fasterxml.jackson.annotation.JsonProperty; @Data public class Root { @JsonProperty(\"class\") private Integer class_1; @JsonProperty(\"int\") p"
+    },
+    {
+      "name": "R3-UI: Python 输出含 class_1 且无裸 class: 字段",
+      "pass": true,
+      "detail": "from dataclasses import dataclass from typing import List, Optional, Any @dataclass class Root: class_1: int # 原 JSON 键: \"class\" int_1: int # 原 JSON 键"
+    },
+    {
+      "name": "R3-滚动: ①「载入示例」后 scrollTop 归零",
+      "pass": true,
+      "detail": "before=362 after={\"ta\":0,\"g\":0}"
+    },
+    {
+      "name": "R3-滚动: ②「从剪贴板粘贴」后 scrollTop 归零",
+      "pass": true,
+      "detail": "before=362 after={\"ta\":0,\"g\":0}"
+    },
+    {
+      "name": "R3-滚动: ③「回灌输出为新输入」后 scrollTop 归零",
+      "pass": true,
+      "detail": "before=362 after={\"ta\":0,\"g\":0}"
+    },
+    {
+      "name": "R3-滚动: ④「清空输入」后 scrollTop 归零",
+      "pass": true,
+      "detail": "before=362 after={\"ta\":0,\"g\":0}"
+    },
+    {
+      "name": "R3-UI: flatten 分隔符下拉 4 项且默认 .",
+      "pass": true,
+      "detail": "{\"opts\":[\".\",\"__\",\"→\",\"/\"],\"value\":\".\"}"
+    },
+    {
+      "name": "R3-UI: flatten 描述含分隔符往返提示且可见",
+      "pass": true,
+      "detail": "{\"t\":\"{\\\"a\\\":{\\\"b\\\":1}} ↔ {\\\"a.b\\\":1} 双向转换；键名本身含分隔符字符时往返可能不保真，建议改用其他分隔符\",\"vis\":true}"
+    },
+    {
+      "name": "R3-UI: flatten(separator=__) 输出含 d.e__f.g",
+      "pass": true,
+      "detail": "{ \"a.b\": 1, \"c\": 2, \"d.e__f.g\": 3 } "
+    },
+    {
+      "name": "R3-UI: flatten→回灌→还原(separator=__) 深等价",
+      "pass": true,
+      "detail": "{ \"a.b\": 1, \"c\": 2, \"d.e\": { \"f.g\": 3 } } "
+    },
+    {
+      "name": "R3-UI: 非法 JSON 错误定位含行号",
+      "pass": true,
+      "detail": "{\"code\":\"\\n\",\"bar\":\"第 4 行Expected ',' or '}' after property value in JSON at position 23 (line 4 column 3)\"}"
+    },
+    {
+      "name": "R4-回归: 首屏工具项总数仍 = 68",
+      "pass": true,
+      "detail": "nav=68"
+    },
+    {
+      "name": "R4-回归: 树形默认展开可见节点 ≥ 8",
+      "pass": true,
+      "detail": "visibleRows=40"
+    },
+    {
+      "name": "R4-UI: Swift CodingKeys case 数 == 属性数 == 3",
+      "pass": true,
+      "detail": "{\"cases\":[{\"n\":\"class_1\",\"k\":\"class\"},{\"n\":\"userName\",\"k\":\"userName\"},{\"n\":\"defaultValue\",\"k\":\"default_value\"}],\"props\":[\"class_1\",\"userName\",\"defaultValue\"]}"
+    },
+    {
+      "name": "R4-UI: Swift 逐条映射（class_1↔class / userName↔userName / defaultValue↔default_value）",
+      "pass": true,
+      "detail": "{\"class_1\":\"class\",\"userName\":\"userName\",\"defaultValue\":\"default_value\"}"
+    },
+    {
+      "name": "R4-UI: Swift 无映射(userName/age) 不生成 CodingKeys",
+      "pass": true,
+      "detail": "struct Root: Codable { let userName: Int let age: Int } "
+    },
+    {
+      "name": "页面 console error 数 = 0",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "__console__",
+      "pass": true,
+      "detail": "{\"errors\":[],\"warnings\":[],\"all\":[]}"
+    },
+    {
+      "name": "file:// 直开可正常渲染（非白屏）",
+      "pass": true,
+      "detail": "{\"nav\":68,\"hasApp\":true}"
+    },
+    {
+      "name": "file:// 下 codec-hash 正常或友好提示",
+      "pass": true,
+      "detail": "{\"error\":null,\"out\":\"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\\n\\n（SHA-256，输入 3 \"}"
+    },
+    {
+      "name": "__file_console__",
+      "pass": true,
+      "detail": "[]"
+    }
+  ],
+  "toolReport": [
+    {
+      "id": "format-pretty",
+      "outLen": 804,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 803 字符"
+    },
+    {
+      "id": "format-minify",
+      "outLen": 523,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 522 字符"
+    },
+    {
+      "id": "format-escape",
+      "outLen": 954,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 953 字符"
+    },
+    {
+      "id": "format-unescape",
+      "outLen": 804,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 803 字符"
+    },
+    {
+      "id": "format-unicode",
+      "outLen": 909,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 908 字符"
+    },
+    {
+      "id": "format-lax",
+      "outLen": 804,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 803 字符"
+    },
+    {
+      "id": "format-sort-keys",
+      "outLen": 804,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 803 字符"
+    },
+    {
+      "id": "format-sort-array",
+      "outLen": 804,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 803 字符"
+    },
+    {
+      "id": "format-dedupe",
+      "outLen": 804,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 803 字符"
+    },
+    {
+      "id": "format-flatten",
+      "outLen": 910,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 909 字符"
+    },
+    {
+      "id": "format-null-clean",
+      "outLen": 785,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 784 字符"
+    },
+    {
+      "id": "format-default-fill",
+      "outLen": 47,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 46 字符"
+    },
+    {
+      "id": "format-single-line",
+      "outLen": 523,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 522 字符"
+    },
+    {
+      "id": "convert-yaml",
+      "outLen": 547,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 546 字符"
+    },
+    {
+      "id": "convert-toml",
+      "outLen": 1,
+      "errVisible": true,
+      "hasCustom": false,
+      "err": true,
+      "status": "TOML 的顶层结构必须是对象（table）：stringify can only be called with an object"
+    },
+    {
+      "id": "convert-xml",
+      "outLen": 871,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 870 字符"
+    },
+    {
+      "id": "convert-csv",
+      "outLen": 311,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 310 字符"
+    },
+    {
+      "id": "convert-querystring",
+      "outLen": 710,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 709 字符"
+    },
+    {
+      "id": "convert-properties",
+      "outLen": 539,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 538 字符"
+    },
+    {
+      "id": "convert-ndjson",
+      "outLen": 521,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 520 字符"
+    },
+    {
+      "id": "convert-md",
+      "outLen": 475,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 474 字符"
+    },
+    {
+      "id": "convert-ts",
+      "outLen": 293,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 292 字符"
+    },
+    {
+      "id": "convert-java",
+      "outLen": 477,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 476 字符"
+    },
+    {
+      "id": "convert-kotlin",
+      "outLen": 342,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 341 字符"
+    },
+    {
+      "id": "convert-go",
+      "outLen": 424,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 423 字符"
+    },
+    {
+      "id": "convert-python",
+      "outLen": 372,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 371 字符"
+    },
+    {
+      "id": "convert-csharp",
+      "outLen": 580,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 579 字符"
+    },
+    {
+      "id": "convert-rust",
+      "outLen": 489,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 488 字符"
+    },
+    {
+      "id": "convert-swift",
+      "outLen": 341,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 340 字符"
+    },
+    {
+      "id": "convert-dart",
+      "outLen": 1455,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 1454 字符"
+    },
+    {
+      "id": "convert-php",
+      "outLen": 353,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 352 字符"
+    },
+    {
+      "id": "convert-ddl",
+      "outLen": 498,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 497 字符"
+    },
+    {
+      "id": "convert-schema",
+      "outLen": 1178,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 1177 字符"
+    },
+    {
+      "id": "query-jsonpath",
+      "outLen": 0,
+      "errVisible": false,
+      "hasCustom": true,
+      "err": false,
+      "status": "执行成功 · 输出 26 字符"
+    },
+    {
+      "id": "query-paths",
+      "outLen": 375,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 374 字符"
+    },
+    {
+      "id": "query-get",
+      "outLen": 9,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 8 字符"
+    },
+    {
+      "id": "query-keys",
+      "outLen": 901,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 900 字符"
+    },
+    {
+      "id": "query-values",
+      "outLen": 729,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 728 字符"
+    },
+    {
+      "id": "query-collect",
+      "outLen": 298,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 297 字符"
+    },
+    {
+      "id": "query-pick",
+      "outLen": 21,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 20 字符"
+    },
+    {
+      "id": "query-omit",
+      "outLen": 804,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 803 字符"
+    },
+    {
+      "id": "query-pluck",
+      "outLen": 27,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 26 字符"
+    },
+    {
+      "id": "query-group",
+      "outLen": 1104,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 1103 字符"
+    },
+    {
+      "id": "query-aggregate",
+      "outLen": 104,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 103 字符"
+    },
+    {
+      "id": "query-merge",
+      "outLen": 20,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 19 字符"
+    },
+    {
+      "id": "query-patch",
+      "outLen": 809,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 808 字符"
+    },
+    {
+      "id": "validate-syntax",
+      "outLen": 44,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 43 字符"
+    },
+    {
+      "id": "validate-duplicate-keys",
+      "outLen": 11,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 10 字符"
+    },
+    {
+      "id": "validate-schema",
+      "outLen": 44,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 43 字符"
+    },
+    {
+      "id": "validate-stats",
+      "outLen": 336,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 335 字符"
+    },
+    {
+      "id": "validate-size",
+      "outLen": 137,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 136 字符"
+    },
+    {
+      "id": "validate-anomaly",
+      "outLen": 164,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 163 字符"
+    },
+    {
+      "id": "validate-security",
+      "outLen": 236,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 235 字符"
+    },
+    {
+      "id": "validate-diff",
+      "outLen": 0,
+      "errVisible": false,
+      "hasCustom": true,
+      "err": false,
+      "status": "执行成功 · 输出 7 字符"
+    },
+    {
+      "id": "validate-example",
+      "outLen": 555,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 554 字符"
+    },
+    {
+      "id": "codec-base64",
+      "outLen": 1129,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 1128 字符"
+    },
+    {
+      "id": "codec-url",
+      "outLen": 1918,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 1917 字符"
+    },
+    {
+      "id": "codec-html",
+      "outLen": 1451,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 1450 字符"
+    },
+    {
+      "id": "codec-jwt",
+      "outLen": 1,
+      "errVisible": true,
+      "hasCustom": false,
+      "err": true,
+      "status": "Header 段解码失败：Unexpected token 'ɝ', \"ɝgjgޙȥΖǂƧ{\u0016ƦW\" is not valid JSON"
+    },
+    {
+      "id": "codec-timestamp",
+      "outLen": 1,
+      "errVisible": true,
+      "hasCustom": false,
+      "err": true,
+      "status": "不是合法的时间戳：[\n  {\n    \"id\": 1,\n    \"name\": \"张三\",\n    \"email\": \"zhangsan@example.com\",\n    \"age\": 28,\n    \"active\": true,\n    \"tags\": [\n      \"admin\",\n      \"vip\"\n    ],\n    \"profile\": {\n      \"bio\": \"前端工程师\",\n      \"city\": \"北京\",\n      \"score\": 92.5\n    },\n    \"createdAt\": \"2023-05-12T08:30:00Z\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"李四\",\n    \"email\": \"lisi@example.com\",\n    \"age\": 34,\n    \"active\": false,\n    \"tags\": [\n      \"user\"\n    ],\n    \"profile\": {\n      \"bio\": \"产品经理\",\n      \"city\": \"上海\",\n      \"score\": 88\n    },\n    \"createdAt\": \"2022-11-02T14:05:00Z\"\n  },\n  {\n    \"id\": 3,\n    \"name\": \"王五\",\n    \"email\": \"wangwu@example.com\",\n    \"age\": 25,\n    \"active\": true,\n    \"tags\": [],\n    \"profile\": {\n      \"bio\": null,\n      \"city\": \"深圳\",\n      \"score\": 76.5\n    },\n    \"createdAt\": \"2024-01-20T09:15:00Z\"\n  }\n]"
+    },
+    {
+      "id": "codec-hash",
+      "outLen": 86,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 85 字符"
+    },
+    {
+      "id": "codec-uuid",
+      "outLen": 185,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 184 字符"
+    },
+    {
+      "id": "codec-regex",
+      "outLen": 859,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 858 字符"
+    },
+    {
+      "id": "codec-string",
+      "outLen": 954,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 953 字符"
+    },
+    {
+      "id": "utility-mock",
+      "outLen": 945,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 944 字符"
+    },
+    {
+      "id": "utility-shuffle",
+      "outLen": 804,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 803 字符"
+    },
+    {
+      "id": "utility-split",
+      "outLen": 906,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 905 字符"
+    },
+    {
+      "id": "utility-sample",
+      "outLen": 804,
+      "errVisible": false,
+      "hasCustom": false,
+      "err": false,
+      "status": "执行成功 · 输出 803 字符"
+    }
+  ],
+  "consoleMsgs": [],
+  "badResponses": []
+}
