@@ -195,6 +195,42 @@
 .tok-punc { color: var(--tok-punc); }
 .tok-com { color: var(--tok-com); font-style: italic; }
 
+/* JSON 可折叠文本视图（输出面板） */
+.jt-cline { display: block; min-height: var(--code-line); }
+.jt-cline:hover { background: var(--bg-hover); }
+.jt-cline-hidden { display: none; }
+.jt-fold-ell { display: none; color: var(--text-tertiary); font-style: italic; margin-left: 4px; }
+.jt-cline.jt-collapsed > .jt-fold-ell { display: inline; }
+.jt-cline.jt-collapsed > .jt-fold-ell-obj::after { content: ' … }'; }
+.jt-cline.jt-collapsed > .jt-fold-ell-arr::after { content: ' … ]'; }
+.jt-gutter-fold { flex: 0 0 58px; width: 58px; }
+.jt-gutter-inner div.jt-gline { display: flex; align-items: center; padding-right: 0; }
+.jt-fold {
+  flex: 0 0 15px; width: 15px; text-align: center; cursor: pointer; user-select: none;
+  color: var(--text-tertiary); font-size: 10px; line-height: var(--code-line);
+}
+.jt-fold:hover { color: var(--primary); }
+.jt-gnum { flex: 1; text-align: right; padding-right: 6px; }
+.jt-g-hidden { visibility: hidden; }
+
+/* 悬浮复制条：跟随悬停行，复制键 / 值 / 对象 / 数组 */
+.jt-copybar {
+  position: absolute; right: 10px; top: 0; display: none; z-index: 20;
+  transform: translateY(-50%); pointer-events: auto;
+}
+.jt-copybar-inner {
+  display: flex; gap: 2px; padding: 2px;
+  background: var(--bg-panel); border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm); box-shadow: var(--shadow-md);
+}
+.jt-copybar-btn {
+  border: 0; background: transparent; color: var(--text-secondary);
+  font-family: var(--font-ui); font-size: 11px; line-height: 1.4;
+  padding: 2px 8px; border-radius: 4px; cursor: pointer; white-space: nowrap;
+}
+.jt-copybar-btn:hover { background: var(--primary-soft); color: var(--primary); }
+
+
 /* 错误提示条 */
 .jt-errbar {
   display: flex; align-items: center; gap: 8px;

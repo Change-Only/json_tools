@@ -350,7 +350,7 @@
   function buildEditors() {
     D.clear(editorsEl);
     inputEditor = JT.editor.create({ mode: 'edit', lang: 'json', title: '输入', value: state.input, actions: inputActions(), onInput: function (v) { state.input = v; JT.storage.setDraft(state.toolId, v); }, onDrop: handleDrop });
-    outputEditor = JT.editor.create({ mode: 'view', lang: 'json', title: '输出', value: '', actions: outputActions() });
+    outputEditor = JT.editor.create({ mode: 'view', lang: 'json', title: '输出', value: '', actions: outputActions(), onCopy: function (t) { JT.editor.copy(String(t)).then(function (ok) { JT.toast.success(ok ? '已复制' : '复制失败'); }); } });
     editorsEl.classList.add('jt-split');
     split = JT.split.create({ container: editorsEl, left: inputEditor.root, right: outputEditor.root, storageKey: 'splitRatio', ratio: 0.5 });
   }

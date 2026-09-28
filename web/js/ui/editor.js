@@ -68,6 +68,52 @@
     return highlightGeneric(text);
   }
 
+  /* ============================ JSON 折叠辅助 ============================ */
+
+  /**
+   * 字符串感知地扫描 JSON 文本，返回所有跨行的 { 与 [ 块。
+   * 返回数组元素：{ start: 开括号行号(0基), end: 闭括号行号(0基), ch: '{'|'[' }（仅收录 start < end 的块）。
+   * 仅在 JSON.parse 已通过时调用，括号必然配对。
+   */
+  function scanJsonBlocks(text) {
+    var stack = [], blocks = [];
+    var inStr = false, escaped = false, line = 0;
+    for (var i = 0; i < text.length; i++) {
+      var c = text.charAt(i);
+      if (c === '\n') { line++; continue; }
+      if (inStr) {
+        if (escaped) escaped = false;
+        else if (c === '\\') escaped = true;
+        else if (c === '"') inStr = false;
+        continue;
+      }
+      if (c === '"') { inStr = true; continue; }
+      if (c === '{' || c === '[') stack.push({ line: line, ch: c });
+      else if (c === '}' || c === ']') {
+        var top = stack.pop();
+        if (top && ((c === '}' && top.ch === '{') || (c === ']' && top.ch === '[')) && line > top.line) {
+          blocks.push({ start: top.line, end: line, ch: top.ch });
+        }
+      }
+    }
+    return blocks;
+  }
+
+  /** 解析 "key": value 形态的行（传入已 trim 文本），返回 { key, rawValue, isString } 或 null。 */
+  function parseKvLine(trimmed) {
+    var m = /^"((?:\\.|[^"\\])*)"\s*:\s*(.+?)\s*,?\s*$/.exec(trimmed);
+    if (!m) return null;
+    var key = m[1];
+    try { key = JSON.parse('"' + m[1] + '"'); } catch (e) { /* 保留原文 */ }
+    return { key: key, rawValue: m[2], isString: m[2].charAt(0) === '"' };
+  }
+
+  /** 把 JSON 字符串字面量（含引号）还原为实际文本；失败时退化为去掉首尾引号。 */
+  function decodeJsonString(raw) {
+    if (raw.charAt(0) !== '"') return raw;
+    try { return JSON.parse(raw); } catch (e) { return raw.slice(1, -1); }
+  }
+
   /* ============================ 复制 ============================ */
 
   function copyText(text) {
@@ -145,21 +191,52 @@
     body.appendChild(gutter);
     body.appendChild(area);
 
+    /* --- 悬浮复制条（仅输出视图）：跟随悬停行，提供复制键 / 值 / 对象 / 数组 --- */
+    var copybar = null, copybarInner = null;
+    if (mode === 'view') {
+      copybar = D().el('div', { class: 'jt-copybar' });
+      copybarInner = D().el('div', { class: 'jt-copybar-inner' });
+      copybar.appendChild(copybarInner);
+      body.appendChild(copybar);
+    }
+    var onCopyFn = typeof opts.onCopy === 'function' ? opts.onCopy : copyText;
+
     var errBar = D().el('div', { class: 'jt-errbar', style: { display: 'none' } });
 
     root.appendChild(head);
     root.appendChild(body);
     root.appendChild(errBar);
 
-    /* --- 行号 --- */
+    /* --- 行号（支持 JSON 折叠箭头） --- */
     var lineCount = 0;
+    var viewText = '';   // 当前视图文本（getValue / setLang / refresh 使用）
+    var fold = null;     // 折叠状态：{ lines, blocks, blockAtStart, lineEls, gEls, arrowEls, collapsed }
+    var copybarLine = -1;
+
     function renderGutter(count) {
-      if (count === lineCount) return;
       lineCount = count;
-      var html = '';
-      for (var i = 1; i <= count; i++) html += '<div>' + i + '</div>';
-      gutterInner.innerHTML = html;
-      // 与内容保持相同行高（CSS 保证），并让 gutter 末尾留白与内容一致
+      if (fold) {
+        // 折叠模式：行号前渲染折叠箭头（仅块首行有）
+        var html = '';
+        for (var i = 0; i < count; i++) {
+          var hasBlock = fold.blockAtStart[i] !== undefined;
+          html += '<div class="jt-gline" data-i="' + i + '">' +
+            '<span class="jt-fold"' + (hasBlock ? ' data-fold="' + i + '" title="折叠 / 展开"' : '') + '>' +
+            (hasBlock ? '▾' : '') + '</span>' +
+            '<span class="jt-gnum">' + (i + 1) + '</span></div>';
+        }
+        gutterInner.innerHTML = html;
+        fold.gEls = gutterInner.querySelectorAll('.jt-gline');
+        fold.arrowEls = {};
+        for (var s in fold.blockAtStart) {
+          var g = fold.gEls[s];
+          if (g) fold.arrowEls[s] = g.firstChild;
+        }
+        return;
+      }
+      var html2 = '';
+      for (var j = 1; j <= count; j++) html2 += '<div>' + j + '</div>';
+      gutterInner.innerHTML = html2;
     }
 
     /* --- 统计 --- */
@@ -181,17 +258,157 @@
       if (scroller) gutter.scrollTop = scroller.scrollTop;
     }
 
-    /* --- 视图渲染 --- */
+    /* --- 视图渲染（JSON 输出走可折叠的逐行渲染，其余走整块高亮） --- */
+    function renderBlob(text) {
+      codeView.classList.remove('jt-code-lines');
+      codeView.innerHTML = highlight(text, lang) + '\n';
+      if (fold) { root.classList.remove('jt-foldable'); gutter.classList.remove('jt-gutter-fold'); }
+      fold = null;
+    }
+
     function renderView(text) {
       if (mode !== 'view' || !codeView) return;
-      codeView.innerHTML = highlight(String(text == null ? '' : text), lang) + '\n';
+      var t = String(text == null ? '' : text);
+      viewText = t;
+      fold = null;
+      hideCopybar();
+
+      // 仅当内容确实是合法 JSON（或 NDJSON 逐行合法）时启用折叠文本视图
+      var canFold = (lang === 'json' || lang === 'ndjson') && t.length > 0;
+      if (canFold && lang === 'json') {
+        try { JSON.parse(t); } catch (e) { canFold = false; }
+      }
+      if (canFold && lang === 'ndjson') {
+        var ndLines = t.split('\n');
+        for (var k = 0; k < ndLines.length; k++) {
+          if (!ndLines[k].trim()) continue;
+          try { JSON.parse(ndLines[k]); } catch (e) { canFold = false; break; }
+        }
+      }
+      var lines = t.split('\n');
+      if (canFold && (lines.length > 8000 || t.length > 2 * 1024 * 1024)) canFold = false; // 超大内容性能保护
+      if (!canFold) { renderBlob(t); renderGutter(Math.max(1, lines.length)); return; }
+
+      var blocks = scanJsonBlocks(t);
+      var blockAtStart = {};
+      blocks.forEach(function (b) { blockAtStart[b.start] = b; });
+      fold = { lines: lines, blocks: blocks, blockAtStart: blockAtStart, lineEls: [], gEls: [], arrowEls: {}, collapsed: {} };
+
+      root.classList.add('jt-foldable');
+      gutter.classList.add('jt-gutter-fold');
+      var html = '';
+      for (var i = 0; i < lines.length; i++) {
+        html += '<div class="jt-cline" data-i="' + i + '">' + highlight(lines[i], 'json');
+        var b = blockAtStart[i];
+        if (b) html += '<span class="jt-fold-ell jt-fold-ell-' + (b.ch === '{' ? 'obj' : 'arr') + '"></span>';
+        html += '</div>';
+      }
+      codeView.classList.add('jt-code-lines');
+      codeView.innerHTML = html;
+      fold.lineEls = codeView.querySelectorAll('.jt-cline');
+      renderGutter(lines.length);
+      applyFold();
+    }
+
+    /* --- 折叠：可见性重算（嵌套折叠时内层保持自身状态） --- */
+    function applyFold() {
+      if (!fold) return;
+      var sorted = fold.blocks.slice().sort(function (a, b) { return a.start - b.start; });
+      var idx = 0, maxEnd = -1;
+      for (var i = 0; i < fold.lines.length; i++) {
+        while (idx < sorted.length && sorted[idx].start < i) {
+          if (fold.collapsed[sorted[idx].start]) maxEnd = Math.max(maxEnd, sorted[idx].end);
+          idx++;
+        }
+        var hidden = i > 0 && maxEnd >= i;
+        var el = fold.lineEls[i];
+        if (el) el.classList.toggle('jt-cline-hidden', hidden);
+        var g = fold.gEls[i];
+        if (g) g.classList.toggle('jt-g-hidden', hidden);
+      }
+      // 同步箭头方向与行内省略号
+      fold.blocks.forEach(function (b) {
+        var collapsedNow = !!fold.collapsed[b.start];
+        var arrow = fold.arrowEls[b.start];
+        if (arrow) { arrow.textContent = collapsedNow ? '▸' : '▾'; arrow.title = collapsedNow ? '展开' : '折叠'; }
+        var opener = fold.lineEls[b.start];
+        if (opener) opener.classList.toggle('jt-collapsed', collapsedNow);
+      });
+    }
+
+    function toggleFold(i) {
+      if (!fold || fold.blockAtStart[i] === undefined) return;
+      if (fold.collapsed[i]) delete fold.collapsed[i]; else fold.collapsed[i] = true;
+      hideCopybar();
+      applyFold();
+    }
+
+    /* --- 悬浮复制条 --- */
+    /** 取块的源码切片；若闭括号行带尾随逗号（非末尾数组元素 / 后续键值对），去掉以保证复制结果为合法 JSON。 */
+    function sliceBlock(b) {
+      var ls = fold.lines.slice(b.start, b.end + 1);
+      ls[ls.length - 1] = ls[ls.length - 1].replace(/^(\s*[}\]])\s*,/, '$1');
+      return ls.join('\n');
+    }
+
+    /** 计算第 i 行可用的复制动作。 */
+    function lineActions(i) {
+      if (!fold) return [];
+      var t = fold.lines[i].trim();
+      if (!t) return [];
+      if (/^[}\])],?$/.test(t)) return []; // 纯收尾括号行
+      var b = fold.blockAtStart[i];
+      var kv = parseKvLine(t);
+      var acts = [];
+      if (kv && kv.key != null) acts.push({ label: '复制键', tip: '复制键名', text: String(kv.key) });
+      if (b) {
+        var what = b.ch === '{' ? '对象' : '数组';
+        acts.push({ label: '复制' + what, tip: '复制完整' + what + '（含子项）', text: sliceBlock(b) });
+      } else if (kv) {
+        acts.push({ label: '复制值', tip: '复制该值', text: kv.isString ? decodeJsonString(kv.rawValue) : kv.rawValue });
+      } else {
+        // 数组标量项（"foo", / 123,）或裸标量
+        var v = t.replace(/,\s*$/, '');
+        acts.push({ label: '复制值', tip: '复制该值', text: v.charAt(0) === '"' ? decodeJsonString(v) : v });
+      }
+      return acts;
+    }
+
+    function hideCopybar() {
+      if (copybar) copybar.style.display = 'none';
+      copybarLine = -1;
+    }
+
+    function showCopybar(i, lineEl) {
+      var acts = lineActions(i);
+      if (!acts.length) { hideCopybar(); return; }
+      if (copybarLine !== i) {
+        D().clear(copybarInner);
+        acts.forEach(function (a) {
+          copybarInner.appendChild(D().el('button', {
+            class: 'jt-copybar-btn', type: 'button', text: a.label, title: a.tip,
+            onclick: function () {
+              Promise.resolve(onCopyFn(a.text)).then(function () { hideCopybar(); }, function () { hideCopybar(); });
+            }
+          }));
+        });
+        copybarLine = i;
+      }
+      var br = body.getBoundingClientRect();
+      var lr = lineEl.getBoundingClientRect();
+      copybar.style.display = 'block';
+      copybar.style.top = Math.max(2, lr.top - br.top + lr.height / 2) + 'px';
+      copybar.style.right = '10px';
     }
 
     function applyText(text) {
       text = String(text == null ? '' : text);
-      if (mode === 'edit') { if (textarea.value !== text) textarea.value = text; }
-      else renderView(text);
-      renderGutter(Math.max(1, text === '' ? 1 : text.split('\n').length));
+      if (mode === 'edit') {
+        if (textarea.value !== text) textarea.value = text;
+        renderGutter(Math.max(1, text === '' ? 1 : text.split('\n').length));
+      } else {
+        renderView(text); // view 模式行号由 renderView 内部渲染（含折叠箭头）
+      }
       updateStats(text);
       updateEmpty(text);
       // 内容整体替换（载入示例 / 粘贴 / 回灌输出 / 清空）后滚动位置归零，行号槽与正文同步
@@ -226,7 +443,23 @@
         if (typeof opts.onDrop === 'function') opts.onDrop(e);
       });
     } else {
-      area.addEventListener('scroll', syncScroll);
+      area.addEventListener('scroll', function () { syncScroll(); hideCopybar(); });
+      // 折叠箭头点击（事件委托，行号槽）
+      gutterInner.addEventListener('click', function (e) {
+        if (!fold) return;
+        var f = e.target && e.target.closest ? e.target.closest('.jt-fold') : null;
+        if (!f) return;
+        var i = f.getAttribute('data-fold');
+        if (i != null && i !== '') toggleFold(parseInt(i, 10));
+      });
+      // 悬停行 → 悬浮复制条
+      codeView.addEventListener('mousemove', function (e) {
+        if (!fold) return;
+        var el = e.target && e.target.closest ? e.target.closest('.jt-cline') : null;
+        if (!el) { hideCopybar(); return; }
+        showCopybar(parseInt(el.getAttribute('data-i'), 10), el);
+      });
+      area.addEventListener('mouseleave', hideCopybar);
     }
 
     /* --- 操作按钮 --- */
@@ -251,10 +484,10 @@
     return {
       root: root,
       mode: mode,
-      getValue: function () { return mode === 'edit' ? textarea.value : (codeView ? codeView.textContent.replace(/\n$/, '') : ''); },
+      getValue: function () { return mode === 'edit' ? textarea.value : viewText; },
       setValue: applyText,
       setTitle: function (t) { badge.textContent = t; },
-      setLang: function (l) { lang = l; renderView(mode === 'edit' ? textarea.value : codeView.textContent); },
+      setLang: function (l) { lang = l; if (mode !== 'edit') renderView(viewText); },
       setActions: setActions,
       setError: function (err) {
         if (!err) { errBar.style.display = 'none'; return; }
@@ -273,10 +506,13 @@
       focus: function () { if (textarea) textarea.focus(); },
       scrollTo: function (top) { var s = mode === 'edit' ? textarea : area; if (s) s.scrollTop = top; },
       getScroller: function () { return mode === 'edit' ? textarea : area; },
-      refresh: function () { renderView(mode === 'edit' ? textarea.value : codeView.textContent); syncScroll(); },
+      refresh: function () { if (mode !== 'edit') renderView(viewText); syncScroll(); },
       /** 用自定义节点替换正文（用于树形 / diff 等视图），opts:{keepGutter} */
       setCustom: function (node, opts) {
         opts = opts || {};
+        fold = null;
+        hideCopybar();
+        renderGutter(lineCount); // 恢复无箭头的普通行号
         gutter.style.display = opts.keepGutter ? '' : 'none';
         D().clear(area);
         emptyHint.style.display = 'none';
