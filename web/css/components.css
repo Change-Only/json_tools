@@ -160,6 +160,11 @@
 .jt-seg:hover:not(.jt-seg-disabled) { background: var(--bg-hover); color: var(--primary); }
 .jt-seg.active { background: var(--primary); border-color: var(--primary); color: #fff; }
 .jt-seg.jt-seg-disabled { opacity: .45; cursor: not-allowed; }
+.jt-seg-edit { letter-spacing: .02em; }
+
+/* 输出面板编辑态：正文为可编辑文本域，给出轻量视觉提示 */
+.jt-panel-editing .jt-panel-body { box-shadow: inset 0 0 0 1.5px var(--primary-soft); border-radius: var(--radius-sm); }
+.jt-panel-editing .jt-panel-title .jt-badge { border-color: var(--primary); color: var(--primary); }
 
 .jt-panel-body { display: flex; flex: 1; min-height: 0; position: relative; }
 .jt-gutter {

@@ -1,0 +1,102 @@
+[
+  {
+    "name": "输出面板有「编辑」按钮",
+    "pass": true,
+    "detail": "text=编辑"
+  },
+  {
+    "name": "初始 textarea 隐藏",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "点击后 textarea 可见可编辑",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "进入编辑态后代码视图隐藏",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "按钮变为「查看」",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "编辑态下树形按钮禁用",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "面板带编辑态标识",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "编辑态下不出现悬浮复制条",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "可直接在输出框输入内容",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "编辑后行数统计已更新",
+    "pass": true,
+    "detail": "5 行 · 51 字符 · 51 字节"
+  },
+  {
+    "name": "编辑内容已同步（复制输出=编辑后文本）",
+    "pass": true,
+    "detail": "clip=\"{\\r\\n  \\\"edited\\\": true,\\r\\n  \\\"n\\\": 1\""
+  },
+  {
+    "name": "退出编辑后代码视图恢复",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "退出编辑后 textarea 隐藏",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "重新渲染内容为编辑后文本",
+    "pass": true,
+    "detail": "sample=\"{  \\\"edited\\\": true,  \\\"n\\\": 1,  \\\"list\\\": [1,\""
+  },
+  {
+    "name": "新内容恢复折叠文本视图",
+    "pass": true,
+    "detail": "lines=5"
+  },
+  {
+    "name": "标题恢复为非编辑态",
+    "pass": true,
+    "detail": "输出 · JSON"
+  },
+  {
+    "name": "非法内容退出编辑不崩溃且保留文本",
+    "pass": true,
+    "detail": "lines=0"
+  },
+  {
+    "name": "切树形前编辑内容已提交不丢失",
+    "pass": true,
+    "detail": "clip=\"{\\\"committed\\\": 42}\""
+  },
+  {
+    "name": "重新执行后自动退出编辑态",
+    "pass": true,
+    "detail": "before=true after=false"
+  },
+  {
+    "name": "console error 数为 0",
+    "pass": true,
+    "detail": ""
+  }
+]

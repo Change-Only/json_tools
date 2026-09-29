@@ -1,0 +1,11 @@
+const t0 = Date.now();
+console.log('start');
+const { chromium } = await import('file:///' + (process.env.TEMP || '/tmp').replace(/\\/g, '/') + '/jtb-pw/node_modules/playwright-core/index.mjs');
+console.log('imported', Date.now() - t0);
+const b = await chromium.launch({ channel: 'msedge', headless: true, timeout: 45000 });
+console.log('launched', Date.now() - t0);
+const p = await b.newPage();
+await p.goto('about:blank');
+console.log('page ok', Date.now() - t0);
+await b.close();
+console.log('done');

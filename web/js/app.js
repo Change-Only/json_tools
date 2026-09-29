@@ -137,6 +137,7 @@
     collapsed: {},
     lastResult: null,
     viewMode: null,
+    outputEditing: false,
     sidebarHidden: false
   };
 
@@ -343,14 +344,19 @@
       { id: 'copy', title: '复制输出 (Ctrl+Shift+C)', svg: svg('binary', 15), onClick: function () { JT.editor.copy(state.output).then(function (ok) { ok ? JT.toast.success('已复制到剪贴板') : JT.toast.error('复制失败，请手动选择复制'); }); } },
       { id: 'swap', title: '结果作为新输入', svg: svg('swap', 15), onClick: swapSides },
       { id: 'save', title: '下载输出 (Ctrl+S)', svg: svg('rows', 15), onClick: downloadOutput },
-      { id: 'clear', title: '清空输出', svg: svg('broom', 15), onClick: function () { state.output = ''; outputEditor.setValue(''); setStatus('ready', '已清空输出'); } }
+      { id: 'clear', title: '清空输出', svg: svg('broom', 15), onClick: function () { state.output = ''; state.outputEditing = false; outputEditor.setValue(''); setStatus('ready', '已清空输出'); } }
     ];
   }
 
   function buildEditors() {
     D.clear(editorsEl);
     inputEditor = JT.editor.create({ mode: 'edit', lang: 'json', title: '输入', value: state.input, actions: inputActions(), onInput: function (v) { state.input = v; JT.storage.setDraft(state.toolId, v); }, onDrop: handleDrop });
-    outputEditor = JT.editor.create({ mode: 'view', lang: 'json', title: '输出', value: '', actions: outputActions(), onCopy: function (t) { JT.editor.copy(String(t)).then(function (ok) { JT.toast.success(ok ? '已复制' : '复制失败'); }); } });
+    outputEditor = JT.editor.create({
+      mode: 'view', lang: 'json', title: '输出', value: '', actions: outputActions(),
+      onCopy: function (t) { JT.editor.copy(String(t)).then(function (ok) { JT.toast.success(ok ? '已复制' : '复制失败'); }); },
+      // 输出面板进入编辑态后，编辑内容实时同步到 state.output，使复制 / 下载 / 作为新输入直接可用
+      onEditText: function (v) { state.output = v; }
+    });
     editorsEl.classList.add('jt-split');
     split = JT.split.create({ container: editorsEl, left: inputEditor.root, right: outputEditor.root, storageKey: 'splitRatio', ratio: 0.5 });
   }
@@ -442,6 +448,37 @@
     return 'text';
   }
 
+  /** 更新输出面板头部视图控件（文本 / 树形 / 编辑）。 */
+  function updateOutputToggle(mode, supportsTree, title) {
+    outputEditor.setViewToggle({
+      visible: true,
+      mode: mode,
+      editable: mode === 'text',
+      editing: state.outputEditing,
+      treeDisabled: !supportsTree,
+      disabledTip: '当前结果不是 JSON 对象/数组，无法使用树形视图',
+      onSelect: function (m) {
+        // 切换视图前若处于编辑态，先把编辑内容提交为新的输出
+        if (state.outputEditing) { state.output = outputEditor.getValue(); state.outputEditing = false; }
+        state.viewMode = m;
+        renderOutput();
+      },
+      onEditSelect: function (flag) {
+        outputEditor.setEditable(flag);
+        state.outputEditing = outputEditor.isEditing();
+        if (flag) {
+          outputEditor.setTitle('输出 · 编辑中');
+          setStatus('ready', '可直接编辑输出内容，改完点「查看」应用');
+        } else {
+          state.output = outputEditor.getValue();
+          outputEditor.setTitle('输出 · ' + title);
+          setStatus('ok', '编辑已应用 · 输出 ' + state.output.length + ' 字符');
+        }
+        updateOutputToggle(mode, supportsTree, title);
+      }
+    });
+  }
+
   /** 仅重绘输出区域（切换文本/树形时复用，无需重新执行工具）。 */
   function renderOutput() {
     var lr = state.lastResult;
@@ -451,6 +488,7 @@
     var mode = decideView(tool, result);
 
     if (mode === 'diff') {
+      state.outputEditing = false;
       outputEditor.setTextMode();
       outputEditor.setCustom(renderDiff(result.data));
       outputEditor.setStatsText('共 ' + result.data.diff.length + ' 处差异');
@@ -460,27 +498,23 @@
     }
 
     if (mode === 'tree') {
+      state.outputEditing = false;
       outputEditor.setTextMode();
       var tree = JT.tree.create({ onCopy: function (t) { JT.editor.copy(String(t)).then(function (ok) { JT.toast.success(ok ? '已复制' : '复制失败'); }); } });
       outputEditor.setCustom(tree.root);
       tree.render(result.data);
       outputEditor.setStatsText('树形视图');
       outputEditor.setTitle('输出 · 树形');
+      updateOutputToggle(mode, supportsTree, '树形');
     } else {
       outputEditor.setTextMode();
       var lang = (result.outLang === 'json' || tool.outLang === 'json') ? 'json' : 'text';
+      var title = langLabel(result.outLang || tool.outLang);
       outputEditor.setLang(lang);
       outputEditor.setValue(state.output);
-      outputEditor.setTitle('输出 · ' + langLabel(result.outLang || tool.outLang));
+      outputEditor.setTitle('输出 · ' + title);
+      updateOutputToggle(mode, supportsTree, title);
     }
-
-    outputEditor.setViewToggle({
-      visible: true,
-      mode: mode,
-      treeDisabled: !supportsTree,
-      disabledTip: '当前结果不是 JSON 对象/数组，无法使用树形视图',
-      onSelect: function (m) { state.viewMode = m; renderOutput(); }
-    });
   }
 
   function renderResult(tool, result, ms) {
@@ -489,6 +523,7 @@
     if (result.error) {
       state.output = '';
       state.lastResult = null;
+      state.outputEditing = false;
       outputEditor.setTextMode();
       outputEditor.setValue('');
       outputEditor.setViewToggle({ visible: false });
@@ -502,6 +537,7 @@
     inputEditor.clearError();
     outputEditor.clearError();
     state.output = result.output == null ? '' : String(result.output);
+    state.outputEditing = false; // 新结果覆盖输出，退出编辑态
 
     state.lastResult = { tool: tool, result: result, ms: ms };
     renderOutput();

@@ -178,6 +178,12 @@
     } else {
       codeView = D().el('pre', { class: 'jt-code' });
       area.appendChild(codeView);
+      // 输出面板同样准备一个默认隐藏的文本域：点「编辑」后可原地修改输出内容
+      textarea = D().el('textarea', {
+        class: 'jt-textarea', spellcheck: 'false', autocomplete: 'off', autocapitalize: 'off',
+        autocorrect: 'off', wrap: 'off', style: { display: 'none' }
+      });
+      area.appendChild(textarea);
     }
     emptyHint = D().el('div', { class: 'jt-empty' });
     emptyHint.innerHTML = opts.emptyHtml || (
@@ -254,7 +260,7 @@
 
     /* --- 滚动同步 --- */
     function syncScroll() {
-      var scroller = mode === 'edit' ? textarea : area;
+      var scroller = (mode === 'edit' || editing) ? textarea : area;
       if (scroller) gutter.scrollTop = scroller.scrollTop;
     }
 
@@ -403,6 +409,7 @@
 
     function applyText(text) {
       text = String(text == null ? '' : text);
+      leaveEditMode(); // 外部整体替换内容（新结果 / 清空 / 回灌）时退出编辑态
       if (mode === 'edit') {
         if (textarea.value !== text) textarea.value = text;
         renderGutter(Math.max(1, text === '' ? 1 : text.split('\n').length));
@@ -417,32 +424,52 @@
       gutter.scrollTop = 0;
     }
 
-    if (mode === 'edit') {
-      textarea.addEventListener('input', function () {
-        renderGutter(Math.max(1, textarea.value.split('\n').length));
-        updateStats(textarea.value);
-        updateEmpty(textarea.value);
-        if (typeof opts.onInput === 'function') opts.onInput(textarea.value);
-      });
-      textarea.addEventListener('scroll', syncScroll);
-      textarea.addEventListener('keydown', function (e) {
-        if (e.key === 'Tab') {
-          e.preventDefault();
-          var s = textarea.selectionStart, en = textarea.selectionEnd;
-          textarea.value = textarea.value.slice(0, s) + '  ' + textarea.value.slice(en);
-          textarea.selectionStart = textarea.selectionEnd = s + 2;
-          textarea.dispatchEvent(new Event('input'));
-        }
-      });
-      // 拖拽上传
-      textarea.addEventListener('dragover', function (e) { e.preventDefault(); root.classList.add('jt-dragover'); });
-      textarea.addEventListener('dragleave', function () { root.classList.remove('jt-dragover'); });
-      textarea.addEventListener('drop', function (e) {
-        e.preventDefault();
-        root.classList.remove('jt-dragover');
-        if (typeof opts.onDrop === 'function') opts.onDrop(e);
-      });
-    } else {
+    /* --- 输出面板「编辑」态：把只读文本视图换成可编辑文本域 --- */
+    var editing = false;
+
+    /** 仅复原 DOM 显示状态（不改内容），供 applyText / setCustom 等外部介入时复用 */
+    function leaveEditMode() {
+      if (!editing) return;
+      editing = false;
+      textarea.style.display = 'none';
+      if (codeView) codeView.style.display = '';
+      root.classList.remove('jt-panel-editing');
+    }
+
+    /**
+     * 切换输出面板的编辑态。
+     * true：文本域可编辑（内容取自当前视图文本）；false：把编辑结果作为新输出重新渲染。
+     */
+    function setEditable(flag) {
+      if (mode !== 'view') return;
+      flag = !!flag;
+      if (flag === editing) return;
+      if (flag) {
+        editing = true;
+        hideCopybar();
+        fold = null;
+        root.classList.remove('jt-foldable');
+        root.classList.add('jt-panel-editing');
+        gutter.classList.remove('jt-gutter-fold');
+        gutter.style.display = '';
+        if (codeView) codeView.style.display = 'none';
+        textarea.value = viewText;
+        textarea.style.display = 'block';
+        renderGutter(Math.max(1, viewText === '' ? 1 : viewText.split('\n').length));
+        updateStats(viewText);
+        updateEmpty(viewText);
+        textarea.scrollTop = 0;
+        gutter.scrollTop = 0;
+        textarea.focus();
+      } else {
+        var t = textarea.value;
+        leaveEditMode();
+        applyText(t);
+        if (typeof opts.onEditText === 'function') opts.onEditText(t);
+      }
+    }
+
+    if (mode === 'view') {
       area.addEventListener('scroll', function () { syncScroll(); hideCopybar(); });
       // 折叠箭头点击（事件委托，行号槽）
       gutterInner.addEventListener('click', function (e) {
@@ -464,6 +491,35 @@
         showCopybar(parseInt(el.getAttribute('data-i'), 10), el);
       });
       body.addEventListener('mouseleave', hideCopybar);
+    }
+
+    /* --- 文本域事件（输入区常驻；输出区进入编辑态后使用同一套逻辑） --- */
+    textarea.addEventListener('input', function () {
+      renderGutter(Math.max(1, textarea.value.split('\n').length));
+      updateStats(textarea.value);
+      updateEmpty(textarea.value);
+      if (typeof opts.onInput === 'function') opts.onInput(textarea.value);
+      if (mode === 'view' && typeof opts.onEditText === 'function') opts.onEditText(textarea.value);
+    });
+    textarea.addEventListener('scroll', syncScroll);
+    textarea.addEventListener('keydown', function (e) {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        var s = textarea.selectionStart, en = textarea.selectionEnd;
+        textarea.value = textarea.value.slice(0, s) + '  ' + textarea.value.slice(en);
+        textarea.selectionStart = textarea.selectionEnd = s + 2;
+        textarea.dispatchEvent(new Event('input'));
+      }
+    });
+    if (mode === 'edit') {
+      // 拖拽上传（仅输入区）
+      textarea.addEventListener('dragover', function (e) { e.preventDefault(); root.classList.add('jt-dragover'); });
+      textarea.addEventListener('dragleave', function () { root.classList.remove('jt-dragover'); });
+      textarea.addEventListener('drop', function (e) {
+        e.preventDefault();
+        root.classList.remove('jt-dragover');
+        if (typeof opts.onDrop === 'function') opts.onDrop(e);
+      });
     }
 
     /* --- 操作按钮 --- */
@@ -488,11 +544,14 @@
     return {
       root: root,
       mode: mode,
-      getValue: function () { return mode === 'edit' ? textarea.value : viewText; },
+      getValue: function () { return (mode === 'edit' || editing) ? textarea.value : viewText; },
       setValue: applyText,
       setTitle: function (t) { badge.textContent = t; },
-      setLang: function (l) { lang = l; if (mode !== 'edit') renderView(viewText); },
+      setLang: function (l) { lang = l; if (mode !== 'edit' && !editing) renderView(viewText); },
       setActions: setActions,
+      /** 切换输出面板编辑态；isEditing() 查询当前是否处于编辑态 */
+      setEditable: setEditable,
+      isEditing: function () { return editing; },
       setError: function (err) {
         if (!err) { errBar.style.display = 'none'; return; }
         D().clear(errBar);
@@ -508,12 +567,15 @@
       },
       clearError: function () { errBar.style.display = 'none'; },
       focus: function () { if (textarea) textarea.focus(); },
+      /** 把焦点交给正文（编辑态下即文本域） */
+      focusBody: function () { if (editing && textarea) textarea.focus(); },
       scrollTo: function (top) { var s = mode === 'edit' ? textarea : area; if (s) s.scrollTop = top; },
       getScroller: function () { return mode === 'edit' ? textarea : area; },
-      refresh: function () { if (mode !== 'edit') renderView(viewText); syncScroll(); },
+      refresh: function () { if (mode !== 'edit' && !editing) renderView(viewText); syncScroll(); },
       /** 用自定义节点替换正文（用于树形 / diff 等视图），opts:{keepGutter} */
       setCustom: function (node, opts) {
         opts = opts || {};
+        leaveEditMode();
         fold = null;
         hideCopybar();
         renderGutter(lineCount); // 恢复无箭头的普通行号
@@ -528,31 +590,45 @@
         gutter.style.display = '';
         D().clear(area);
         if (mode === 'edit') area.appendChild(textarea);
-        else if (codeView) area.appendChild(codeView);
+        else {
+          if (codeView) { codeView.style.display = editing ? 'none' : ''; area.appendChild(codeView); }
+          if (textarea) { textarea.style.display = editing ? 'block' : 'none'; area.appendChild(textarea); }
+        }
         area.appendChild(emptyHint);
       },
       setStatsText: function (t) { stats.textContent = t; },
       /**
-       * 设置输出面板头部的「文本 / 树形」视图切换控件。
-       * opt: { visible, mode:'text'|'tree', treeDisabled, disabledTip, onSelect(mode) }
+       * 设置输出面板头部的视图控件：「文本 / 树形」+「编辑」。
+       * opt: { visible, mode:'text'|'tree', editable, editing, treeDisabled, disabledTip, onSelect(mode), onEditSelect(flag) }
        */
       setViewToggle: function (opt) {
         D().clear(viewToggle);
         if (!opt || !opt.visible) { viewToggle.style.display = 'none'; return; }
         viewToggle.style.display = '';
-        var mode = opt.mode || 'text';
+        var m = opt.mode || 'text';
+        var editingNow = !!opt.editing;
         var btnText = D().el('button', {
-          class: 'jt-seg' + (mode === 'text' ? ' active' : ''), type: 'button', text: '文本', title: '以文本显示',
+          class: 'jt-seg' + (m === 'text' && !editingNow ? ' active' : ''), type: 'button', text: '文本', title: '以文本显示',
           onclick: function () { if (typeof opt.onSelect === 'function') opt.onSelect('text'); }
         });
+        var treeBlocked = !!opt.treeDisabled || editingNow;
         var btnTree = D().el('button', {
-          class: 'jt-seg' + (mode === 'tree' ? ' active' : '') + (opt.treeDisabled ? ' jt-seg-disabled' : ''), type: 'button', text: '树形',
-          title: opt.treeDisabled ? (opt.disabledTip || '当前结果不支持树形视图') : '以树形结构显示',
-          onclick: function () { if (opt.treeDisabled) return; if (typeof opt.onSelect === 'function') opt.onSelect('tree'); }
+          class: 'jt-seg' + (m === 'tree' ? ' active' : '') + (treeBlocked ? ' jt-seg-disabled' : ''), type: 'button', text: '树形',
+          title: opt.treeDisabled ? (opt.disabledTip || '当前结果不支持树形视图') : (editingNow ? '编辑状态下不支持树形视图' : '以树形结构显示'),
+          onclick: function () { if (treeBlocked) return; if (typeof opt.onSelect === 'function') opt.onSelect('tree'); }
         });
-        if (opt.treeDisabled) btnTree.disabled = true;
+        if (treeBlocked) btnTree.disabled = true;
         viewToggle.appendChild(btnText);
         viewToggle.appendChild(btnTree);
+        if (opt.editable) {
+          var btnEdit = D().el('button', {
+            class: 'jt-seg jt-seg-edit' + (editingNow ? ' active' : ''), type: 'button',
+            text: editingNow ? '查看' : '编辑',
+            title: editingNow ? '结束编辑并重新渲染' : '直接编辑输出内容',
+            onclick: function () { if (typeof opt.onEditSelect === 'function') opt.onEditSelect(!editingNow); }
+          });
+          viewToggle.appendChild(btnEdit);
+        }
       }
     };
 
